@@ -135,6 +135,8 @@ aChar = 'x'
 
 ### String
 
+#### The Type
+
 PureScript's Strings are UTF-16 due to JavaScript. Haskell's `String`s are unfortunately an alias to `[Char]` (i.e. `List Char`). Moreover, its syntax `"example string"` is of type `String`/`[Char]`. Thus, everyone uses `Text` as the main `String` type instead and `pack`/`unpack`. There are other String types as well.
 
 ```purescript
@@ -164,6 +166,58 @@ binaryStringValue :: ByteString
 binaryStringValue =
   -- i.e. "a string value"
   pack [97,32,115,116,114,105,110,103,32,118,97,108,117,101]
+```
+
+#### Syntax Sugar
+
+```purescript
+slashy_string_syntax :: String
+slashy_string_syntax =
+  "Enables multi-line strings that \
+  \use slashes \
+            \regardless of indentation \
+
+    \and regardless of vertical space between them \
+
+    \(though you can't put comments in that blank vertical space)"
+    {-
+    "This will fail \
+    -- oh look a comment that breaks this!
+    \to compile."
+    -}
+
+triple_quote_string_syntax :: String
+triple_quote_string_syntax = """
+  Multi-line string syntax that also ignores escaped characters, such as
+  * . $ []
+  It's useful for regular expressions
+  """
+```
+
+```haskell
+slashy_string_syntax :: String
+slashy_string_syntax =
+  "Enables multi-line strings that \
+  \use slashes \
+            \regardless of indentation \
+
+    \and regardless of vertical space between them \
+
+    \(though you can't put comments in that blank vertical space)"
+    {-
+    "This will fail \
+    -- oh look a comment that breaks this!
+    \to compile."
+    -}
+
+-- This doesn't compile. I'm not sure whether this can be defined in a
+-- different way
+-- triple_quote_string_syntax :: String
+-- triple_quote_string_syntax = """
+--   Multi-line string syntax that also ignores escaped characters, such as
+--   * . $ []
+--   It's useful for regular expressions
+--   """
 ```
 
 ### Int
