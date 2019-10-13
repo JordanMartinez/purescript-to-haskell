@@ -64,6 +64,20 @@ type TypeAlias = OriginalType
 newtype Age = Age OriginalType
 ```
 
+## Empty Data Types
+
+PureScript can define data types that don't have a constructor (usually for phantom types that tag something at the type-level). Haskell requires the `EmptyDataDecl` language extension to be enabled.
+
+```purescript
+data PhantomType_NoConstructors
+```
+
+```haskell
+{-# EmptyDataDecl #-}
+
+data PhantomType_NoConstructors
+```
+
 ## Primitive-ish Types
 
 ### Boolean
