@@ -118,6 +118,12 @@ intArray :: Vector Int
 intArray = generate 4 id -- i.e. `id :: forall a. a -> a`
 ```
 
+#### The `OverloadedLists` Language Extension
+
+```haskell
+-- TODO
+```
+
 ### Char
 
 PureScript's `Char` is a single character (i.e. UFT-16 code **unit**) and cannot represent code point values greater than `0xFFFF`. Haskell's `Char` is "an enumeration whose values represent Unicode (or equivalently ISO/IEC 10646) code **point**s."
@@ -137,7 +143,7 @@ aChar = 'x'
 
 #### The Type
 
-PureScript's Strings are UTF-16 due to JavaScript. Haskell's `String`s are unfortunately an alias to `[Char]` (i.e. `List Char`). Moreover, its syntax `"example string"` is of type `String`/`[Char]`. Thus, everyone uses `Text` as the main `String` type instead and `pack`/`unpack`. There are other String types as well.
+PureScript's Strings are UTF-16 due to JavaScript. Haskell's `String`s are unfortunately an alias to `[Char]` (i.e. `List Char`). Moreover, its syntax `"example string"` is of type `String`/`[Char]`.
 
 ```purescript
 stringValue :: String
@@ -149,17 +155,25 @@ type String = [Char] -- aka `List Char`
 
 notStringValue :: String -- aka `List Char`
 notStringValue = "I am a singly-linked list of characters, not a String"
+```
 
--- Separate file below
+#### The Real Haskell String Types
 
+Due to the above situation, everyone uses `Text` as the main `String` type instead of `[Char]`/`String` or `ByteString` when referring to a binary representation of a `Text` value.
+
+Since the literal syntax `"string value"` will define a value that has type `[Char`], how can people easily create `Text` or `ByteString` values? They use one of two options:
+- Use the corresponding type's `pack`/`unpack` function
+- Enable the `OverloadedStrings` language extension.
+
+```haskell
 import Data.Text (pack)
 
 realStringValue :: Text
 realStringValue =
   pack "The output of `pack` will be the String data type you're used to."
+```
 
--- Separate file below
-
+```haskell
 import Data.ByteString (pack)
 
 binaryStringValue :: ByteString
@@ -167,6 +181,13 @@ binaryStringValue =
   -- i.e. "a string value"
   pack [97,32,115,116,114,105,110,103,32,118,97,108,117,101]
 ```
+
+#### The `OverloadedStrings` Language Extension
+
+```haskell
+-- TODO
+```
+
 
 #### Syntax Sugar
 
