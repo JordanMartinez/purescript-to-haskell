@@ -258,3 +258,21 @@ provideAUnitValue = unit
 provideUnitValue :: ()
 provideUnitValue = ()
 ```
+
+### Unicode Syntax
+
+PureScript supports the unicode alternatives to ASCII character sequences. Haskell requires the [`UnicodeSyntax` language extension](https://downloads.haskell.org/~ghc/8.6.5/docs/html/users_guide/glasgow_exts.html#extension-UnicodeSyntax) to be enabled for this support to be added.
+
+```purescript
+-- Not all Unicode alternatives are shown below
+join ∷ ∀ m a. Monad m ⇒ m (m a) → m a
+join -- implementation
+```
+
+```haskell
+{-# LANGUAGE UnicodeSyntax #-}
+
+-- Not all Unicode alternatives are shown below
+join ∷ ∀ m a. Monad m ⇒ m (m a) → m a
+join -- implementation
+```
