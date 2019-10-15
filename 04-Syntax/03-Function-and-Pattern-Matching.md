@@ -118,7 +118,7 @@ literalValue _   = "catch-all"
 
 ### List and Array Pattern Matching
 
-PureScript's `[]` pattern matching syntax works only on `Array`s. Haskell's works on `List`s, but can be made to work on any `Sequence`-like data structure if one enables the `OverloadedLists` language extension.
+PureScript's `[]` pattern matching syntax works only on `Array`s. Haskell's works on `List`s, but can be made to work on any `Sequence`-like data structure if one enables the `OverloadedLists` language extension. Moreover, PureScript does not allow the usage of `1 : Nil` in the pattern matching of a list whereas Haskell does.
 
 ```purescript
 array :: Array Int -> String
@@ -133,18 +133,30 @@ array _            = "catchall for arrays."
 
 list :: List Int -> String
 list Nil = "empty list"
-list (Cons 1 Nil) = "List with one value that is 1"
+list (Cons 1 Nil) = "List with one value that is 1"                       {-
+list (1 : Nil) = "this would not compile"                                 -}
 list (Cons x (Cons y tail)) = "another example"
 ```
 
 ```haskell
--- TODO
-```
+{-# LANGUAGE OverloadedLists #-}
 
-#### The `OverloadedLists` Language Extension
+import Data.Vector
 
-```haskell
--- TODO
+array :: Vector Int -> String
+array []           = "an empty array"
+array [0]          = "an array with one value that is 0"
+array [0, 1]       = "an array with two values, 0 and 1"
+array [0, 1, a, b] = "an array with four values, starting with 0 and 1 \
+                       \ and binding the third and fouth to names 'a' and 'b'"
+array [-1, _ ]     = "an array of two values, '-1' and another value that \
+                       \ will not be used in the body of this function."
+array _            = "catchall for arrays."
+
+list :: List Int -> String
+list [] = "empty list"
+list 1 : [] = "List with one value that is 1"
+list x : y : tail = "another example"
 ```
 
 ### Unwrapping Data Constructors
