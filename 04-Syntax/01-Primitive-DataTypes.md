@@ -100,7 +100,9 @@ falseValue = False
 
 ### Array and List
 
-The syntax for PureScript's `Array` type is the syntax Haskell uses for `List`
+#### Basic
+
+Purescript uses `[]` syntax for Arrays. Haskell uses `[]` syntax for `List`s.
 
 ```purescript
 data List a
@@ -120,22 +122,92 @@ intArray = [1, 2, 3]
 ```
 
 ```haskell
+import Data.Vector (generate) -- i.e. `forall a. Int -> (Int -> a) -> Vector a`
+
 -- type List a = [a]
 
 intList :: [Int] -- i.e. `List Int`
-intList = [1, 2, 3]
-
--- Separate file
-import Data.Vector (generate) -- i.e. `forall a. Int -> (Int -> a) -> Vector a`
+intList = [1, 2, 3] -- i.e. 1 : 2 : 3 : Nil where `:` is `Cons`
 
 intArray :: Vector Int
 intArray = generate 4 id -- i.e. `id :: forall a. a -> a`
 ```
 
+#### Additional Comparisons and Defining Ranges
+
+In PureScript, we can define a range of values using a function. Haskell has syntax directly for this:
+
+```pureScript
+[]          -- Empty Array
+[x]         -- Array with 1 element
+[x,y,z]     -- Array with 3 elements
+
+-- Not supported
+-- [x .. ]     -- enumFrom x
+-- [x,y ..]    -- enumFromThen x y
+
+x .. y    -- `x .. y` is infix for `range x y` from `Data.Array (range)`
+
+-- Not supported
+-- [x,y .. z]  -- enumFromThenTo x y z
+```
+
+[These examples are taken from the examples in `OverloadedLists` extension](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#extension-OverloadedLists)
+```haskell
+[]          -- Empty list
+[x]         -- x : []
+[x,y,z]     -- x : y : z : []
+[x .. ]     -- enumFrom x
+[x,y ..]    -- enumFromThen x y
+[x .. y]    -- enumFromTo x y
+[x,y .. z]  -- enumFromThenTo x y z
+```
+
 #### The `OverloadedLists` Language Extension
 
+Fortunately, Haskell can enable the `OverloadedLists` extension to make the `[]` syntax work on more things. Here's how it works. There's a type clas called `IsList`:
+
 ```haskell
--- TODO
+class IsList l where
+  type Item l
+
+  fromList :: [Item l] -> l
+  toList   :: l -> [Item l]
+
+  fromListN :: Int -> [Item l] -> l
+  fromListN _ = fromList
+```
+
+When the extension is enabled, the above examples are desugared to this:
+
+```haskell
+[]          -- fromListN 0 []
+[x]         -- fromListN 1 (x : [])
+[x,y,z]     -- fromListN 3 (x : y : z : [])
+[x .. ]     -- fromList (enumFrom x)
+[x,y ..]    -- fromList (enumFromThen x y)
+[x .. y]    -- fromList (enumFromTo x y)
+[x,y .. z]  -- fromList (enumFromThenTo x y z)
+```
+
+Thus, one can use this syntax to write:
+```haskell
+['0' .. '9']             :: Set Char
+[1 .. 10]                :: Vector Int
+[("default",0), (k1,v1)] :: Map String Int
+['a' .. 'z']             :: Text
+```
+
+Returning to our previous example, we could write:
+```haskell
+{-# LANGUAGE OverloadedLists #-}
+import Data.Vector
+
+intList :: [Int] -- i.e. `List Int`
+intList = [1, 2, 3] -- i.e. 1 : 2 : 3 : Nil where `:` is `Cons`
+
+intArray :: Vector Int
+intArray = [1, 2, 3]
 ```
 
 ### Char
@@ -198,10 +270,31 @@ binaryStringValue =
 
 #### The `OverloadedStrings` Language Extension
 
+Similar to the `OverloadedLists` extension above, the double-quote syntax can be overridden so that it does not refer to Haskell's `[Char]` type. Here's how it works. There's a type class called `IsString`:
+
 ```haskell
--- TODO
+class IsString a where
+    fromString :: String -> a
 ```
 
+When `OverloadedStrings` is enabled, this syntax `"text"` becomes `fromString "text"`. As a result, we can rewrite the above `Text` and `ByteString` examples as:
+
+```haskell
+{-# LANGUAGE OverloadedStrings #-}
+import Data.Text
+
+realStringValue :: Text
+realStringValue =
+  "The output of `pack` will be the String data type you're used to."
+```
+
+```haskell
+{-# LANGUAGE OverloadedStrings #-}
+import Data.ByteString
+
+binaryStringValue :: ByteString
+binaryStringValue = "a string value"
+```
 
 #### Syntax Sugar
 
