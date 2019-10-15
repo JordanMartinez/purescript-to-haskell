@@ -73,7 +73,7 @@ data PhantomType_NoConstructors
 ```
 
 ```haskell
-{-# EmptyDataDecl #-}
+{-# LANGUAGE EmptyDataDecl #-}
 
 data PhantomType_NoConstructors
 ```
