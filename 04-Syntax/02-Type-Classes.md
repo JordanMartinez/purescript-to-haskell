@@ -107,6 +107,59 @@ class ManyFDRelationships a b c | a b -> c, c -> a b where
   functionName4 :: a -> b -> c
 ```
 
+## Constraint Kinds
+
+### Context
+
+Let's say we have the following function:
+```purescript
+foo
+  :: forall m.
+     MonadReader Config m =>
+     MonadState State m =>
+     MonadWriter String m =>
+     MonadCatch Error m =>
+     m Unit
+foo = ...
+```
+
+If we have to define 6 other functions that use those same type class constraints, it can lead to a lot of boilerplate. "Constraint kinds" provide a solution to this problem.
+
+### Comparison
+
+Unfortunately, PureScript does not yet allow one to define a constraint kind. However, Haskell does if one enables [the `ConstraintKinds` language extension](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#extension-ConstraintKinds)
+
+```purescript
+{-
+This pseudo-code does not really work
+
+type ConstraintKind m a =
+  MonadReader Config m =>
+  MonadState State m =>
+  MonadWriter String m =>
+  MonadCatch Error m =>
+  m a
+
+foo :: ConstraintKind m Unit
+foo = ...
+
+-}
+```
+
+```haskell
+{-# LANGUAGE ConstraintKinds #-}
+
+type ConstraintKind m =
+  ( MonadReader Config m
+  , MonadState State m
+  , MonadWriter String m
+  , MonadCatch Error m
+  )
+
+foo :: ConstraintKind m => m Unit
+foo = ...
+```
+
 ## Defining Type Class Instances
 
 ### Single Parameter Instances
