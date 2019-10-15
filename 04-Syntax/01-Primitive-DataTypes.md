@@ -379,6 +379,8 @@ aReallyBigInt = 99999999999999999999999999999999999999999999999999999999999999
 
 ### Number
 
+#### Basic
+
 PureScript's `Number` is a double-precision floating-point number due to JavaScript. Haskell's corresponding type is `Double`.
 
 ```purescript
@@ -394,7 +396,7 @@ aNumber2 :: Double  -- double-precision floating-point numbers
 aNumber2 = 4.0
 ```
 
-#### Syntax Sugar for Ints and Numbers
+#### Underscore Syntax Sugar for Ints and Numbers
 
 Since its `0.13.0` release, PureScript allows the usage of underscores to make numeric values more readable. Haskell allows this, too, but only if the `NumericLiterals` language extension is enabled.
 
@@ -413,6 +415,27 @@ readableInt = 1_000_000
 
 readableNumber :: Double
 readableNumber = 1_000_000.0
+```
+
+#### Dealing with Negated Literals
+
+PureScript handles negative literals properly. Haskell requires parenthesis. One can remove this by enabling [the `NegativeLiterals` language extension](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#extension-NegativeLiterals). See the extension for what else it affects.
+
+```purescript
+repl> 4 + -4
+0
+```
+
+```haskell
+repl> 4 + -4
+  Precedence parsing error
+    cannot mix ‘+’ [infixl 6] and prefix `-' [infixl 6] in the same
+    infix expression
+repl> 4 + (-4)
+0
+repl>:set -XNegativeLiterals
+repl>4 + -4
+0
 ```
 
 ### Unit and Row Kinds
