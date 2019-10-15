@@ -433,8 +433,8 @@ repl> 4 + -4
     infix expression
 repl> 4 + (-4)
 0
-repl>:set -XNegativeLiterals
-repl>4 + -4
+repl> :set -XNegativeLiterals
+repl> 4 + -4
 0
 ```
 
