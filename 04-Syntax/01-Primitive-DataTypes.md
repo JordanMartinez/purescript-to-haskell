@@ -28,7 +28,7 @@ comment
 
 These are the same.
 
-```puresript
+```purescript
 -- Sum and product types
 data TypeConstructor aType bType hktBy1 phantomType
   = NoArgs
