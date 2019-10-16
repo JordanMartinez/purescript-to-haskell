@@ -26,6 +26,8 @@ comment
 
 ## The `data` Keyword
 
+### Basic
+
 These are the same.
 
 ```purescript
@@ -54,6 +56,20 @@ data TypeConstructor aType bType hktBy1 phantomType
   | HigherKindedGenericType2 (hktBy1 aType)
   | Recursive (TypeConstructor aType bType hktBy1 phantomType)
   | ArgMix Type_ (A -> B) bType (TypeConstructor aType bType hktBy1 phantomType)
+```
+
+### Using Kind Signatures
+
+PureScript's kind signatures work out-of-box. Haskell requires a language extension called `KindSignatures`.
+
+```purescript
+data SomeProxy (functor :: Type -> Type) = SomeProxy
+```
+
+```haskell
+{-# LANGUAGE KindSignatures #-}
+
+data SomeProxy (functor :: * -> *) = SomeProxy
 ```
 
 ## The `newtype` Keyword
@@ -94,6 +110,19 @@ type ProduceSomeB b = forall a. a -> b
 type ProduceSomeB b = forall a. a -> b
 ```
 
+### Using Kind Signatures
+
+PureScript's kind signatures work out-of-box. Haskell requires a language extension called `KindSignatures`.
+
+```purescript
+type MyType (functor :: Type -> Type) a = a
+```
+
+```haskell
+{-# LANGUAGE KindSignatures #-}
+
+type MyType (functor :: * -> *) a = a
+```
 
 ## Empty Data Types
 

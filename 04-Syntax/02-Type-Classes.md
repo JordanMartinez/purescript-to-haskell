@@ -127,6 +127,20 @@ class ManyFDRelationships a b c | a b -> c, c -> a b where
   functionName4 :: a -> b -> c
 ```
 
+### Using Kind Signatures
+
+PureScript's kind signatures work out-of-box. Haskell requires a language extension called `KindSignatures`.
+
+```purescript
+class TypeLevelFunction (input :: InputKind) f | input -> f
+```
+
+```haskell
+{-# LANGUAGE KindSignatures #-}
+
+class TypeLevelFunction (input :: InputKind) f | input -> f
+```
+
 ## Constraint Kinds
 
 ### Context

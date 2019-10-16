@@ -303,6 +303,23 @@ foo :: forall a. (forall b. b -> a) -> a
 foo :: forall a. (forall b. b -> a) -> a
 ```
 
+
+### Using Kind Signatures
+
+PureScript's kind signatures work out-of-box. Haskell requires a language extension called `KindSignatures`.
+
+```purescript
+foo :: forall (someKind :: SomeKind) b. Proxy someKind -> b
+foo = -- ...
+```
+
+```haskell
+{-# LANGUAGE KindSignatures #-}
+
+foo :: forall (someKind :: SomeKind) b. Proxy someKind -> b
+foo = -- ...
+```
+
 ## Case Statements
 
 ### Single Variable
