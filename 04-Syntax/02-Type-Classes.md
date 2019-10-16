@@ -56,7 +56,6 @@ class EmptyTypeClass
 ```haskell
 {-# LANGUAGE MultiParameterTypeClasses #-}
 class EmptyTypeClass
-
 ```
 
 ### Multiple Parameters
