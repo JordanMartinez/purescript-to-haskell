@@ -1,6 +1,8 @@
-# Functions and Pattern Matching
+# Functions etc.
 
 ## Functions
+
+### Basic
 
 The languages work the same for defining and using functions
 
@@ -13,7 +15,22 @@ lambda = \x -> x + 1
 
 higherOrderFunction1 :: Int -> (Int -> Int) -> (Int -> Int)
 higherOrderFunction1 x f = \y -> (f y) + x
+```
 
+```haskell
+function :: Int -> Int
+function 4 = 4
+
+lambda :: Int -> Int
+lambda = \x -> x + 1
+
+higherOrderFunction1 :: Int -> (Int -> Int) -> (Int -> Int)
+higherOrderFunction1 x f = \y -> (f y) + x
+```
+
+## Let / In / Where Statements
+
+```purescript
 whereUsage :: Int -> Int
 whereUsage x = x + y
   where y = 4
@@ -29,15 +46,6 @@ letWhereUsage x =
 ```
 
 ```haskell
-function :: Int -> Int
-function 4 = 4
-
-lambda :: Int -> Int
-lambda = \x -> x + 1
-
-higherOrderFunction1 :: Int -> (Int -> Int) -> (Int -> Int)
-higherOrderFunction1 x f = \y -> (f y) + x
-
 whereUsage :: Int -> Int
 whereUsage x = x + y
   where y = 4
@@ -281,6 +289,18 @@ doFoo value = value <> anotherValue
   anotherValue = mempty
 ```
 
-### Case Statements
+### Nested Foralls (i.e. Rank-N Types)
 
-### Let / In / Where Statements
+Rank-N Types work out-of-box with PureScript. Haskell requires a language extension: [`RankNTypes`](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/glasgow_exts.html#extension-RankNTypes).
+
+```purescript
+foo :: forall a. (forall b. b -> a) -> a
+```
+
+```haskell
+{-# LANGUAGE RankNTypes #-}
+
+foo :: forall a. (forall b. b -> a) -> a
+```
+
+## Case Statements
