@@ -399,7 +399,6 @@ Note: Haskell's numerical type class hierarchy works differently than PureScript
 {-# LANGUAGE DeriveFunctor #-}
 {-# LANGUAGE DeriveFoldable #-}
 {-# LANGUAGE DeriveTraversable #-}
-{-# LANGUAGE DeriveAnyClass #-}
 
 data SomeFunctor a = SomeFunctor a
   deriving (
@@ -411,8 +410,6 @@ data SomeFunctor a = SomeFunctor a
     -- ^ only if `DeriveFoldable` extension is enabled
     Traversable,
     -- ^ only if `DeriveTraversable` extension is enabled
-    Applicative, Monad
-    -- ^ only if `DeriveAnyClass` extension is enabled
   )
 ```
 
