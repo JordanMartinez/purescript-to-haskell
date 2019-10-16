@@ -304,3 +304,56 @@ foo :: forall a. (forall b. b -> a) -> a
 ```
 
 ## Case Statements
+
+### Single Variable
+
+```purescript
+foo :: String -> String
+foo x = case x of
+  "some value" -> "first match"
+  _ -> "catch all"
+```
+
+```haskell
+foo :: String -> String
+foo x = case x of
+  "some value" -> "first match"
+  _ -> "catch all"
+```
+
+### Multi Variable
+
+```purescript
+foo :: String -> String -> String
+foo x = case x, y of
+  "some value", "another value" -> "first match"
+  _ -> "catch all"
+```
+
+```haskell
+-- TODO: This fails to compile. Not sure whether this can be fixed or not...
+foo :: String -> String -> String
+foo x = case x, y of
+  "some value", "another value" -> "first match"
+  _ -> "catch all"
+```
+
+### Syntax Sugar
+
+PureScript can use `case _ of` syntax to omit the name of the binding. Haskell requires the language extension `LambdaCase` and modifies its syntax slightly.
+
+```purescript
+foo :: String -> String
+foo = case _ of
+  "some value" -> "first match"
+  _ -> "catch all"
+```
+
+```haskell
+{-# LANGUAGE LambdaCase #-}
+
+foo :: String -> String
+foo = \case
+  "some value" -> "first match"
+  _ -> "catch all"
+```
