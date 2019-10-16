@@ -58,6 +58,22 @@ class EmptyTypeClass
 class EmptyTypeClass
 ```
 
+### Type Class Members with Constraints
+
+PureScript can add type class constraints to its members out-of-box. Haskell requires enabling a language extension called `ConstrainedClassMethods`:
+
+```purescript
+class SomeClass a where
+  someFunction :: Eq a => a -> a -> a
+```
+
+```haskell
+{-# LANGUAGE ConstrainedClassMethods #-}
+
+class SomeClass a where
+  someFunction :: Eq a => a -> a -> a
+```
+
 ### Multiple Parameters
 
 #### Without Functional Dependencies
