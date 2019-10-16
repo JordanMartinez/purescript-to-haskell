@@ -74,6 +74,11 @@ class SomeClass a where
   someFunction :: Eq a => a -> a -> a
 ```
 
+### Other Extensions to Enable by Default
+
+- `FlexibleInstances`
+- `FlexibleContexts`
+
 ### Multiple Parameters
 
 #### Without Functional Dependencies
