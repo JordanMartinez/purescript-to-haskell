@@ -72,6 +72,38 @@ data SomeProxy (functor :: Type -> Type) = SomeProxy
 data SomeProxy (functor :: * -> *) = SomeProxy
 ```
 
+### Defining Custom Kinds
+
+PureScript uses foreign imports to create custom kinds and their values. Haskell uses the `DataKinds` language extension to create such things for you.
+
+```purescript
+{-
+-- type-level type and its type-level values
+data MyKind
+  = First
+  | Second
+-}
+foreign import kind MyKind
+foreign import data First :: MyKind
+foreign import data Second :: MyKind
+```
+
+```haskell
+{-# LANGUAGE DataKinds #-}
+
+data MyKind
+  = First
+  | Second
+
+{-
+-- These type-level entities are created as well
+
+data 'MyKind
+  = 'First
+  | 'Second
+-}
+```
+
 ## The `newtype` Keyword
 
 These are the same
