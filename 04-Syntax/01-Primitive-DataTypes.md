@@ -24,7 +24,7 @@ comment
 -}
 ```
 
-## Data, Type, and Newtype
+## The `data` Keyword
 
 These are the same.
 
@@ -40,10 +40,6 @@ data TypeConstructor aType bType hktBy1 phantomType
   | HigherKindedGenericType2 (hktBy1 aType)
   | Recursive (TypeConstructor aType bType hktBy1 phantomType)
   | ArgMix Type_ (A -> B) bType (TypeConstructor aType bType hktBy1 phantomType)
-
-type TypeAlias = OriginalType
-
-newtype Age = Age OriginalType
 ```
 
 ```haskell
@@ -58,11 +54,46 @@ data TypeConstructor aType bType hktBy1 phantomType
   | HigherKindedGenericType2 (hktBy1 aType)
   | Recursive (TypeConstructor aType bType hktBy1 phantomType)
   | ArgMix Type_ (A -> B) bType (TypeConstructor aType bType hktBy1 phantomType)
+```
 
-type TypeAlias = OriginalType
+## The `newtype` Keyword
 
+These are the same
+
+```purescript
 newtype Age = Age OriginalType
 ```
+
+```haskell
+newtype Age = Age OriginalType
+```
+
+## The `type` keyword
+
+### Basic
+
+These are the same
+```purescript
+type TypeAlias = OriginalType
+```
+
+```haskell
+type TypeAlias = OriginalType
+```
+
+### Using `forall` in the Type Alias Declaration
+
+PureScript's works out-of-box. Haskell requires a language extension called `LiberalTypeSynonyms`
+
+```purescript
+type ProduceSomeB b = forall a. a -> b
+```
+
+```haskell
+{-# LANGUAGE LiberalTypeSynonyms #-}
+type ProduceSomeB b = forall a. a -> b
+```
+
 
 ## Empty Data Types
 
