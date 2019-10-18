@@ -66,6 +66,10 @@ letWhereUsage x =
   where z = 10
 ```
 
+### A Note on Let Generalization
+
+To improve type inference, PureScript does not generalize `let` bindings to be as polymorphic as possible by default. Unfortunately, Haskell does by default. If one enables the `MonoLocalBinds` extension, Haskell will be more conservative, resulting in behavior that is more akin to PureScript's type inference behavior.
+
 ## Abbreviated Function Bodies
 
 These are the same in both languages.
