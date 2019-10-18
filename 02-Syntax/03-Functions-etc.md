@@ -411,3 +411,32 @@ foo someFunction = someFunction do -- no $ here
     Foo a -> a
   pure a
 ```
+
+## Annotating a polymorphic type with a more specific type signature
+
+PureScript does not have syntax for type application whereas Haskell does via the extension, `TypeApplications`.
+
+```purescript
+class Foldable f where
+  foldl :: forall a b. (b -> a -> b) -> b -> f a -> f b
+
+foo :: Int
+foo =
+  let intArrayFold = foldl :: (Int -> Int -> Int) -> Int -> Array Int -> Int
+  in intArrayFold (+) 0 [1, 2, 3]
+```
+
+```haskell
+-- extension not enabled
+foo :: Int
+foo =
+  let intArrayFold = foldl :: (Int -> Int -> Int) -> Int -> Array Int -> Int
+  in intArrayFold (+) 0 [1, 2, 3]
+```
+
+```haskell
+{-# LANGUAGE TypeApplications #-}
+foo :: Int
+foo =
+  let intArrayFold = foldl @Vector @Int @Int
+  in intArrayFold (+) 0 [1, 2, 3]
