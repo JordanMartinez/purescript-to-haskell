@@ -34,6 +34,32 @@ foo2 x y =
      | otherwise             -> "baz"
 ```
 
-## `do` expressions
+## Applicative Do Notation
 
-## `ado` expressions
+Applicative do works out-of-box with PureScript. Haskell requires the `ApplicativeDo` language extension.
+
+```purescript
+fooDesugared :: Maybe Int
+fooDesugared = \a b _ -> a + b
+  <$> comp1
+  <*> comp2
+  <*> comp3
+
+fooSugared :: Maybe Int
+fooSugared = ado
+  a <- comp1
+  b <- comp2
+  comp3
+  in a + b
+```
+
+```purescript
+{-# LANGUAGE ApplicativeDo #-}
+
+fooSugared :: Maybe Int
+fooSugared = ado
+  a <- comp1
+  b <- comp2
+  comp3
+  in a + b
+```
