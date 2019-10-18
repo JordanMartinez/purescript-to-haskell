@@ -415,7 +415,7 @@ data SomeFunctor a = SomeFunctor a
 
 ### Newtyped Types
 
-PureScript can derive an instance if the type that was newtyped has an instance for it. Haskell can do the same only if the `GeneralizedNewtypeDeriving` language extension is enabled.
+PureScript can derive an instance if the type that was newtyped has an instance for it. Haskell can do the same only if the `GeneralizedNewtypeDeriving` language extension is enabled. In addition, one might need to enable the `DerivingVia` extension to ensure the correct instance was used.
 
 ```purescript
 class SpecialShow a where
@@ -439,4 +439,31 @@ instance SpecialShow Int where
 
 newtype Cent = Cent Int
   deriving (SpecialShow)
+```
+
+```haskell
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE DerivingVia #-}
+
+-- Given these two type classes
+class Semigroup a where
+  append :: a -> a -> a
+
+class Semigroup a => Monoid m where
+  mempty :: a
+
+-- and these two implementations
+newtype Sum = Sum Int
+newtype Product = Product Int
+
+instance Semigroup Sum where append = (+)
+instance Monoid Sum where mempty = 0
+
+instance Semigroup Product where append = (*)
+instance Monoid Product where mempty = 1
+
+-- we can specify that the Semigroup instance uses the Sum Int one,
+-- not the Product Int one.
+newtype Cent = Cent Int
+  deriving Semigroup via (Sum Int)
 ```
