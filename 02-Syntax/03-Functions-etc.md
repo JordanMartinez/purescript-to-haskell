@@ -15,6 +15,9 @@ lambda = \x -> x + 1
 
 higherOrderFunction1 :: Int -> (Int -> Int) -> (Int -> Int)
 higherOrderFunction1 x f = \y -> (f y) + x
+
+typeClassConstrainedFunction :: forall f. Foldable f => f Int -> Int
+typeClassConstrainedFunction = foldl (+) 0
 ```
 
 ```haskell
@@ -26,6 +29,9 @@ lambda = \x -> x + 1
 
 higherOrderFunction1 :: Int -> (Int -> Int) -> (Int -> Int)
 higherOrderFunction1 x f = \y -> (f y) + x
+
+typeClassConstrainedFunction :: Foldable f => f Int -> Int
+typeClassConstrainedFunction = foldl (+) 0
 ```
 
 ## Let / In / Where Statements
