@@ -98,7 +98,7 @@ class MultiParameterTypeClass type1 type2 {- typeN -} where
 
 #### With Functional Dependencies
 
-Haskell requires you to enable the `FunctionalDependencies` language extensions to define a type class with functional dependencies between its multiple parameters. PureScript's definition works out-of-box.
+PureScript's definition works out-of-box. Haskell requires you to enable the `FunctionalDependencies` language extensions to define a type class with functional dependencies between its multiple parameters. In addition, you might need to enable the `UndecidableInstances` language extension when using functional dependencies; otherwise, the compiler might think your instances are invalid.
 
 Note: enabling Haskell's `FunctionalDependencies` language extension implies enabling the `MultiParameterTypeClasses` language extension.
 
