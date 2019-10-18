@@ -380,3 +380,34 @@ foo = \case
   "some value" -> "first match"
   _ -> "catch all"
 ```
+
+## Passing Constructs as Arguments to Functions
+
+Constructs that are passed to functions as arguments work out-of-box with PureScript. Haskell requires the `BlockArguments` language extensions.
+```purescript
+foo someFunction useArgument = someFunction do
+  a <- comp1
+  b <- comp2 \argument -> useArgument argument
+  comp3 case b of
+    Foo a -> a
+  pure a
+```
+
+```haskell
+foo someFunction useArgument = someFunction $ do -- notice the $ here
+  a <- comp1
+  b <- comp2 (\argument -> useArgument argument) -- and parenthesis here
+  comp3 $ case b of -- and $ again here
+    Foo a -> a
+  pure a
+```
+
+```haskell
+{-# LANGUAGE BlockArguments #-}
+foo someFunction = someFunction do -- no $ here
+  a <- comp1
+  comp2 \argument -> useArgument argument -- no parenthesis here
+  comp3 case b of   -- no $ here
+    Foo a -> a
+  pure a
+```
