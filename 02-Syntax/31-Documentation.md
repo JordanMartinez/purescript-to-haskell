@@ -2,7 +2,7 @@
 
 PureScript documentation gets converted to Markdown. It does not support links to other modules, functions, values, type classes, or their instances. (While this can be 'hacked in' by inserting a link that will "just so happen" to get rendered as a link to the corresponding entity, it's a hack.)
 
-Haskell's documentation is a bit more powerful. See [Haddock User Guide](https://www.haskell.org/haddock/doc/html/index.html) for full explanation.
+Haskell's documentation is a lot more powerful. See [Haddock User Guide](https://www.haskell.org/haddock/doc/html/index.html) for full explanation.
 
 ## Basic Concepts
 
