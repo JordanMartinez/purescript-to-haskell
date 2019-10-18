@@ -63,3 +63,36 @@ fooSugared = ado
   comp3
   in a + b
 ```
+
+## Rebindable Do and Ado Notation
+
+PureScript can rebind do and ado notation out-of-box using two methods. Haskell can rebind its syntax when the `RebindaleSyntax` extension is enabled. It can rebind `do` notation, but different functions have to be rebound than PureScript's corresponding version. I don't think Haskell can rebind `ado` notation. Lastly, Haskell can rebind more of its syntax than PureScript can.
+
+```purescript
+foo =
+  -- local rebinding
+  let
+    bind = {- impl -}
+    discard = {- impl -}
+  in do
+    a <- comp1
+    comp2
+    pure a
+
+foo2 = MyModule.do   -- qualified rebinding
+  a <- comp1
+  comp2
+  pure a
+```
+
+```haskell
+foo =
+  -- local rebinding
+  let
+    >>= = {- impl -}
+    pure = {- impl -}
+  in do
+    a <- comp1
+    comp2
+    pure a
+```
