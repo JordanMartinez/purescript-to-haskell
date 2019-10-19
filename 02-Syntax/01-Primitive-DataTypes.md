@@ -556,6 +556,36 @@ provideUnitValue :: ()
 provideUnitValue = ()
 ```
 
+## Tuple Syntax
+
+PureScript's `Tuple` is just like other data types. Haskell has special syntax for it: `(,)`, `(,,)`, etc.
+
+```purescript
+import Data.Tuple (Tuple(..))
+import Data.Tuple.Nested ((/\))
+
+-- data Tuple a b = Tuple a b
+
+foo :: forall a b. Tuple a b -> a
+foo (Tuple a _) = a
+
+nestedTuple :: forall a b c d. Tuple a (Tuple b (Tuple c (Tuple d)))
+nestedTuple = Tuple a (Tuple b (Tuple c (Tuple d)))
+
+nestedTupleSyntaxSugar :: forall a b c d. a /\ b /\ c /\ d
+nestedTupleSyntaxSugar = Tuple a (Tuple b (Tuple c (Tuple d)))
+```
+
+```haskell
+type Tuple a b = (a,b)
+
+foo :: (a, b) -> a
+foo (a, _) = a
+
+nestedTuple :: (a,b,c,d)
+nestedTuple = (a,b,c,d)
+```
+
 ## Unicode Syntax
 
 PureScript supports the unicode alternatives to ASCII character sequences. Haskell requires the [`UnicodeSyntax` language extension](https://downloads.haskell.org/~ghc/8.6.5/docs/html/users_guide/glasgow_exts.html#extension-UnicodeSyntax) to be enabled for this support to be added.
