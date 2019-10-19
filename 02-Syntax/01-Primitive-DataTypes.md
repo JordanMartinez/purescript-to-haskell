@@ -530,7 +530,7 @@ repl> 4 + -4
 0
 ```
 
-### Unit and Row Kinds
+## Unit and Row Kinds
 
 PureScript uses the `Unit` type and `unit` for its value; it uses `()` to denote an empty row and `(a :: String)` for a single closed row of types.
 
@@ -556,7 +556,7 @@ provideUnitValue :: ()
 provideUnitValue = ()
 ```
 
-### Unicode Syntax
+## Unicode Syntax
 
 PureScript supports the unicode alternatives to ASCII character sequences. Haskell requires the [`UnicodeSyntax` language extension](https://downloads.haskell.org/~ghc/8.6.5/docs/html/users_guide/glasgow_exts.html#extension-UnicodeSyntax) to be enabled for this support to be added.
 
