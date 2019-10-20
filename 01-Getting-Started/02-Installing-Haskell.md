@@ -12,7 +12,8 @@ curl -sSL https://get.haskellstack.org/ | sh
 # 2. Upgrade Stack
 stack upgrade
 # 3. Create a new Stack-based project
-cd ~/Haskell
+#     in the `~/Projects/haskell-project/` directory
+cd ~/Projects
 stack new haskell-project
 
 # 4. Download a version of the GHC without installing it globally on your computer
