@@ -1,8 +1,10 @@
 # Haskell REPL
 
+## Quick Broad Overview
+
 Assuming your current working directory is still `~/Haskell-project`, run `stack ghci` to start the repl.
 
-Once started, here's a quick overview of some of the things you can do to make the experience better:
+Once started, here's a quick overview of some of the things you can do to make the experience better. Once done here, skim through the [GHCi User Manual](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/ghci.html):
 ```
 -- Change the prompt, so that it doesn't show all modules that are currently imported.
 *Main Lib> :set prompt "> "
@@ -98,7 +100,7 @@ someFunc :: IO ()
 -- Quit the REPL
 > :quit
 
--- Now all of the settings and bindings you set are gone.
+-- Now all of the settings you set and bindings you made are gone.
 
 -- Restarting the GHCi...
 stack ghci
@@ -117,3 +119,7 @@ An example `.ghci` file might look like this:
 :set -Wall
 :set -XOverloadedStrings
 ```
+
+## Scoping Rules in GHCi
+
+Read through [What's realy in scope at the prompt?](https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/ghci.html#what-s-really-in-scope-at-the-prompt)
