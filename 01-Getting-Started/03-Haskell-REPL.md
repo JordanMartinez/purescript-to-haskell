@@ -91,6 +91,14 @@ someFunc :: IO ()
 > :type +d [1, 2 ,3]
 [1, 2 ,3] :: [Integer]
 
+-- Get the documentation for an entity
+> :doc words
+ 'words' breaks a string up into a list of words, which were delimited
+ by white space.
+
+ >>> words "Lorem ipsum\ndolor"
+ ["Lorem","ipsum","dolor"]
+
 -- Enable a language extension
 > :set -XOverloadedStrings
 
