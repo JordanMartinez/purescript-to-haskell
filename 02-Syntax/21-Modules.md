@@ -86,6 +86,8 @@ import ModuleWithInstances ()
 
 ### Dealing with Entity Name Clashes
 
+#### Basic
+
 ```purescript
 -- resolve name conflicts using "hiding" keyword
 import ModuleNameClash1 (sameFunctionName1)
@@ -104,6 +106,10 @@ import ModuleNameClash2 hiding (sameFunctionName1)
 import qualified ModuleNameClash1 as M1
 import qualified ModuleNameClash2 as M2
 ```
+
+#### Package Imports
+
+Haskell also allows one to use the [`PackageImports`](https://limperg.de/ghc-extensions/#packageimports) language extension to import modules with the same name.
 
 ### Importing Type Aliases that Use Symbolic Names
 
