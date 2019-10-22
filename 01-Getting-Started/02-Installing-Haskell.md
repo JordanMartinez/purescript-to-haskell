@@ -16,7 +16,10 @@ stack upgrade
 cd ~/Projects
 stack new haskell-project
 
-# 4. Download a version of the GHC without installing it globally on your computer
+# 4. Change directory into the project's root folder
+cd haskell-project/
+
+# 5. Download a version of the GHC without installing it globally on your computer
 #    This will take a long time to do the first time, but will be quick every
 #    time thereafter.
 stack setup
