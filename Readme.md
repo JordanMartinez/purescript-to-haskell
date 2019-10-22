@@ -22,6 +22,8 @@
 ### Non-Goals of this library
 
 - Teach one how to use Haskell or the functional paradigm
+- Teach PureScript to a Haskell programmer
+- Rewrite what has already been written
 
 ## How I got Here
 
