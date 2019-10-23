@@ -24,7 +24,7 @@ cd haskell-project/
 #    time thereafter.
 stack setup
 
-# 5. Build the sample project
+# 6. Build the sample project
 stack build
 ```
 
