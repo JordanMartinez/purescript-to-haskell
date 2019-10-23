@@ -34,6 +34,21 @@ typeClassConstrainedFunction :: Foldable f => f Int -> Int
 typeClassConstrainedFunction = foldl (+) 0
 ```
 
+### Partial Functions
+
+PureScript requires a partial function to be annoated via the `Partial` type class. Haskell has no such distinction; to know whether a function is partial, one would have to look at the source code or already know that that function is partial:
+
+```purescript
+fromJust :: forall a. Partial => Maybe a -> a
+fromJust (Just a) = a
+```
+
+```haskell
+fromJust :: forall a. Maybe a -> a
+fromJust (Just a) = a
+fromJust _ = error "This is a partial function. You should have used it better."
+```
+
 ## Let / In / Where Statements
 
 ```purescript
