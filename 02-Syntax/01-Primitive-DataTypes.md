@@ -58,6 +58,23 @@ data TypeConstructor aType bType hktBy1 phantomType
   | ArgMix Type_ (A -> B) bType (TypeConstructor aType bType hktBy1 phantomType)
 ```
 
+### PureScript's "undefined" and Haskell's `undefined` / bottom
+
+Haskell has a value known as "bottom." It is typically referred to via `undefined`. When it is evaluated, it produces a runtime error. PureScript can produce a similar value but it takes more effort:
+
+```purescript
+import Effect.Unsafe (unsafePerformEffect)
+import Effect.Exception (throwException, error)
+
+undefined :: forall a. a
+undefined = unsafePerformEffect (throwException (error "runtime exception"))
+```
+
+```haskell
+undefined :: forall a. a
+undefined = error "runtime exception"
+```
+
 ### Using Kind Signatures
 
 PureScript's kind signatures work out-of-box. Haskell requires a language extension called `KindSignatures`.
