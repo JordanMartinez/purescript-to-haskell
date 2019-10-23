@@ -4,6 +4,8 @@
 
 [Via the Feynman Technique](https://medium.com/taking-note/learning-from-the-feynman-technique-5373014ad230), this repository exists to help me understand how to use Haskell on the backend via Yesod or Servant with the goal of using PureScript on the front-end, and to help anyone else who is walking along a similar path.
 
+See the [Table of Contents file](../table-of-contents.md).
+
 ### Goals of this library
 
 - [Done] - Explain how to install Haskell and setup a developer environment
