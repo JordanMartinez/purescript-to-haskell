@@ -102,7 +102,7 @@ someFunc :: IO ()
 -- Enable a language extension
 > :set -XOverloadedStrings
 
--- Enable GHC options
+-- Enable a GHC option
 > :set -Wall
 
 -- Quit the REPL
