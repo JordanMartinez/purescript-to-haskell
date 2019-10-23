@@ -22,7 +22,27 @@ main = log (render (fooToStuff (Foo 4 "no")))
 ```
 ... we evaluate `Foo 4 "no"` right away to produce a `Foo`, then pass it into `fooToStuff`, which converts it to `Stuff` immediately, and `show` converts it into a `String` and `log` prints that value to the console.
 
-Depending on your perspective, Haskell is for better or worse lazy by default. Thus, if we converted the above PureScript code into Haskell and did not force the code to be strict, this is how the equivalent Haskell code would look in PureScript. In short, all values are wrapped in a thunk/closure:
+Depending on your perspective, Haskell is for better or worse lazy by default. If we rewrote the above code as Haskell and did NOT make it strict, this is what we would write in Haskell.
+
+```haskell
+data Foo = Foo Int String
+
+data Stuff = Stuff
+  { stuffMyInt :: Int
+  , stuffMyBool :: Boolean
+  }
+
+fooToStuff :: Foo -> Stuff
+fooToStuff (Foo i s) = Stuff { stuffMyInt = i, stuffMyBool = s == "meh" }
+
+stuffRender :: Stuff -> String
+stuffRender (Stuff myInt myBool) = (show myInt) <> " , " <> (show myBool)
+
+main :: IO ()
+main = putStrLn (render (fooToStuff (Foo 4 "no")))
+```
+
+If we ran the above Haskell code, this is what it would look like if we were running PureScript instead. In short, all values are wrapped in a thunk/closure and only the final `Effect` causes these thunks/closures to be run:
 ```purescript
 -- A closure, a thunk, or whatever you want to call it
 type Lazy a = Unit -> a
@@ -30,6 +50,7 @@ type Lazy a = Unit -> a
 force :: Lazy a -> a
 force thunk = thunk unit
 
+-- Notice that everything is lazy now...
 data Foo = Foo (Lazy Int) (Lazy String)
 
 type Stuff =
@@ -40,7 +61,7 @@ type Stuff =
 main :: Effect Unit
 main =
   let
-    -- First it builds up a ton of closures
+    -- First it builds up a ton of thunks/closures
     lazyInt = \_ -> 4
     lazyString = \_ -> "no"
 
@@ -66,7 +87,7 @@ main =
     log = \_ -> force stuffRender
 
   in
-    -- Then it gets to the last one and finally forces the thunk /
+    -- Now that all thunks have been created, it finally forces the thunk /
     -- evaluates the closure. Each in turn forces the
     -- next thunk / evaluates the next closure until
     -- the program finshes executing.
