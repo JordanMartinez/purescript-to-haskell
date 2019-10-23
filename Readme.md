@@ -11,6 +11,7 @@
 - [Done] - Show the similarities, differences, and gotchas between PureScript and Haskell Syntax
 - [Done] - Overview which language extensions one should enable to get a Haskell developer experience that is near enough to a PureScript experience and how that affects the syntax
 - [Done] - Cover the main differences between Stack and Cabal, the two main build tools for Haskell
+- Cover other gotchas PS developers may experience
 - Overview the dependencies used in Yesod and Servant (e.g. aeson, text, blaze, etc.)
 - Overview Yesod
     - Start with [Yesod for Haskellers](https://www.yesodweb.com/book/yesod-for-haskellers) to learn how it works without Template Haskell
@@ -18,7 +19,7 @@
 - Overview Servant
     - Don't use the [stable branch's tutorial](https://haskell-servant.readthedocs.io/en/stable/tutorial/)
     - Use the [master branch's tutorial](https://docs.servant.dev/en/master/tutorial/index.html)
-- Provide sample `.package.yml` file for Yesod and Servant 
+- Provide sample `.package.yml` file for Yesod and Servant
 
 ### Non-Goals of this library
 
