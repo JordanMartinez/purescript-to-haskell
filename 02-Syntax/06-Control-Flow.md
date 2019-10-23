@@ -96,3 +96,19 @@ foo =
     comp2
     pure a
 ```
+
+## Monads that Indicate Native Side Effects
+
+PureScript uses `Effect` for synchronous effects due to the JavaScript backend constraint. To simulate asychronous effects, they use `Aff`. `Aff` on a JavaScript backend allows "concurrent but not parallel" programming. In other words, only one Aff "Fiber" can be running at a given time.
+Haskell uses `IO`, which works very similarly to `Aff`. However, Haskell's `IO` enables "concurrent and parallel" programming. In other words, multiple threads can be executing a Haskell program at a given time.
+
+```purescript
+main :: Effect Unit
+main = launchAff_ do
+  liftEffect $ log "some message"
+```
+
+```haskell
+main :: IO ()
+main = putStrLn "some message"
+```
