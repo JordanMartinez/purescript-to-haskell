@@ -1,5 +1,12 @@
 # Gotchas
 
+## `compose` and other symbolic operators
+
+| PureScript | Haskell |
+| - | - |
+| `thenDoY <<< doX` | `thenDoY . doX` |
+| `arg # function` | `arg & function` |
+
 ## Prelude is Unsafe
 
 AFAICT, Haskell's default Prelude has at least the following issues:
