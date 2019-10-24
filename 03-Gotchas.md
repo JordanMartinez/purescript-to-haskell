@@ -13,7 +13,7 @@ AFAICT, Haskell's default Prelude has at least the following issues:
 
 As a result, [many have attempted to define an alternative Prelude]((https://guide.aelve.com/haskell/alternative-preludes-zr69k1hc)) that deals with some of these issues. Unfortunately, I'm not sure whether using such alternatives is ultimately worth it.
 
-## Exceptions Galore
+## Handling Exceptions - Synchronous and Asynchronous
 
 - https://tech.fpcomplete.com/haskell/tutorial/exceptions
 - https://markkarpov.com/tutorial/exceptions.html
