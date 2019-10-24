@@ -17,3 +17,33 @@ As a result, [many have attempted to define an alternative Prelude]((https://gui
 
 - https://tech.fpcomplete.com/haskell/tutorial/exceptions
 - https://markkarpov.com/tutorial/exceptions.html
+
+## Numeric Hierarchy
+
+### PS Hierarchy to Haskell Concepts
+
+The numeric type class hierarchy work differently in PureScript than it does in Haskell.
+
+| PureScript Type Class | Haskell package |
+| - | - |
+| Semigroup | `base` |
+| Monoid | `base` |
+| Semiring | `semirings` |
+| Ring | `semirings` |
+| Commutative Ring | `semirings`? |
+| Division Ring | `semirings`? |
+| Field | `semirings` |
+| Euclidean Ring | `semirings` |
+
+### Haskell Numeric Type Class Hierarchy
+
+![Haskell Numeric Type Class Hierarchy](./assets/Haskell-Numeric-Type-Class-Hierarchy.svg)
+
+Read over their docs to get an idea for what functions they define.
+- [Num](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Num)
+- [Real](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Real)
+- [Integral](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Integral)
+- [Fractional](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Fractional)
+- [RealFrac](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:RealFrac)
+- [Floating](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Floating)
+- [RealFloat](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:RealFloat)
