@@ -15,11 +15,10 @@
   <graph edgedefault="directed" id="G">
     <data key="d0"/>
     <node id="n0">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="42.271484375" x="181.27298797123015" y="0.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="32.271484375" x="5.0" y="6.015625">Num<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -33,11 +32,10 @@
       </data>
     </node>
     <node id="n1">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="35.99609375" x="97.94163566468254" y="0.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="25.99609375" x="5.0" y="6.015625">Ord<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -51,11 +49,10 @@
       </data>
     </node>
     <node id="n2">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="40.408203125" x="105.83756510416667" y="61.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="30.408203125" x="5.0" y="6.015625">Real<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -69,11 +66,10 @@
       </data>
     </node>
     <node id="n3">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="48.482421875" x="20.00005890376984" y="61.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#99CCFF" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="38.482421875" x="5.0" y="6.015625">Enum<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -87,11 +83,10 @@
       </data>
     </node>
     <node id="n4">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="60.470703125" x="29.12377542162698" y="122.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="50.470703125" x="5.0" y="6.015625">Integral<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -105,11 +100,10 @@
       </data>
     </node>
     <node id="n5">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="73.4609375" x="176.2461185515873" y="61.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="63.4609375" x="5.0" y="6.015625">Fractional<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -123,11 +117,10 @@
       </data>
     </node>
     <node id="n6">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="62.193359375" x="215.79022507440476" y="122.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="52.193359375" x="5.0" y="6.015625">Floating<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -141,11 +134,10 @@
       </data>
     </node>
     <node id="n7">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="66.1953125" x="119.59480406746033" y="122.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="56.1953125" x="5.0" y="6.015625">RealFrac<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -159,11 +151,10 @@
       </data>
     </node>
     <node id="n8">
-      <data key="d5"/>
       <data key="d6">
         <y:ShapeNode>
           <y:Geometry height="30.0" width="70.044921875" x="164.76722160218253" y="183.0"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#CCFFCC" transparent="false"/>
           <y:BorderStyle color="#000000" raised="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" horizontalTextPosition="center" iconTextGap="4" modelName="custom" textColor="#000000" verticalTextPosition="bottom" visible="true" width="60.044921875" x="5.0" y="6.015625">RealFloat<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>

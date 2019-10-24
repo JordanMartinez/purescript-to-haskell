@@ -13,63 +13,63 @@
     <g fill="white" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="translate(-5,15)" stroke="white">
       <rect x="5" width="288" height="243" y="-15" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="181.273" width="42.2715" height="30" y="0" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="181.273" width="42.2715" height="30" y="0" clip-path="url(#clipPath2)"/>
       <text x="188.273" xml:space="preserve" y="19.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Num</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(153,204,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(153,204,255)">
       <rect x="97.9416" width="35.9961" height="30" y="0" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="97.9416" width="35.9961" height="30" y="0" clip-path="url(#clipPath2)"/>
       <text x="104.9416" xml:space="preserve" y="19.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Ord</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="105.8376" width="40.4082" height="30" y="61" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="105.8376" width="40.4082" height="30" y="61" clip-path="url(#clipPath2)"/>
       <text x="112.8376" xml:space="preserve" y="80.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Real</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(153,204,255)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(153,204,255)">
       <rect x="20.0001" width="48.4824" height="30" y="61" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="20.0001" width="48.4824" height="30" y="61" clip-path="url(#clipPath2)"/>
       <text x="27.0001" xml:space="preserve" y="80.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Enum</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="29.1238" width="60.4707" height="30" y="122" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="29.1238" width="60.4707" height="30" y="122" clip-path="url(#clipPath2)"/>
       <text x="36.1238" xml:space="preserve" y="141.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Integral</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="176.2461" width="73.4609" height="30" y="61" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="176.2461" width="73.4609" height="30" y="61" clip-path="url(#clipPath2)"/>
       <text x="183.2461" xml:space="preserve" y="80.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Fractional</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="215.7902" width="62.1934" height="30" y="122" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="215.7902" width="62.1934" height="30" y="122" clip-path="url(#clipPath2)"/>
       <text x="222.7902" xml:space="preserve" y="141.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">Floating</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="119.5948" width="66.1953" height="30" y="122" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
       <rect fill="none" x="119.5948" width="66.1953" height="30" y="122" clip-path="url(#clipPath2)"/>
       <text x="126.5948" xml:space="preserve" y="141.1543" clip-path="url(#clipPath2)" font-family="sans-serif" stroke="none">RealFrac</text>
     </g>
-    <g fill="rgb(255,204,0)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(255,204,0)">
+    <g fill="rgb(204,255,204)" text-rendering="geometricPrecision" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke="rgb(204,255,204)">
       <rect x="164.7672" width="70.0449" height="30" y="183" clip-path="url(#clipPath2)" stroke="none"/>
     </g>
     <g text-rendering="geometricPrecision" stroke-miterlimit="1.45" shape-rendering="geometricPrecision" transform="matrix(1,0,0,1,-5,15)" stroke-linecap="butt">
