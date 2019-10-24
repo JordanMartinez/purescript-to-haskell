@@ -47,3 +47,5 @@ Read over their docs to get an idea for what functions they define.
 - [RealFrac](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:RealFrac)
 - [Floating](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:Floating)
 - [RealFloat](https://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#t:RealFloat)
+
+For a venn-diagram-basd way to visualize it, see [Haskell: Numeric Type Classes - How Numbers Work!](https://gist.github.com/CMCDragonkai/fab0980b3325e8a788c9#file-the_diagram-png)
