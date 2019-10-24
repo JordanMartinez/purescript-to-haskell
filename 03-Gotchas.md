@@ -17,6 +17,7 @@ AFAICT, Haskell's default Prelude has at least the following issues:
     - [text](https://hackage.haskell.org/package/text) to get PureScript-like `String`s
     - [deepseq](https://hackage.haskell.org/package/deepseq) to get functions that can make things strict
     - [unordered-containers](https://hackage.haskell.org/package/unordered-containers) to get hashing-based containers (e.g. `HashMap`s, `Set`s, etc.).
+- various other problems mentioned in [Punt the Prelude : Inside 245-5D](http://blog.ezyang.com/2010/05/punt-the-prelude/)
 
 As a result, [many have attempted to define an alternative Prelude]((https://guide.aelve.com/haskell/alternative-preludes-zr69k1hc)) that deals with some of these issues. Unfortunately, I'm not sure whether using such alternatives is ultimately worth it.
 
