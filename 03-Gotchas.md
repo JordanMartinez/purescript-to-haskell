@@ -20,22 +20,7 @@ As a result, [many have attempted to define an alternative Prelude]((https://gui
 
 ## Numeric Hierarchy
 
-### PS Hierarchy to Haskell Concepts
-
-The numeric type class hierarchy work differently in PureScript than it does in Haskell.
-
-| PureScript Type Class | Haskell package |
-| - | - |
-| Semigroup | `base` |
-| Monoid | `base` |
-| Semiring | `semirings` |
-| Ring | `semirings` |
-| Commutative Ring | `semirings`? |
-| Division Ring | `semirings`? |
-| Field | `semirings` |
-| Euclidean Ring | `semirings` |
-
-### Haskell Numeric Type Class Hierarchy
+The numeric type class hierarchy work differently in PureScript than it does in Haskell. Thus, some have come up with the [numeric-prelude](https://hackage.haskell.org/package/numeric-prelude-0.1.3.4) to account for some of these shortcomings. Again, I don't know how frequently this library is used, nor what tradeoffs are made by using it.
 
 ![Haskell Numeric Type Class Hierarchy](./assets/Haskell-Numeric-Type-Class-Hierarchy.svg)
 
