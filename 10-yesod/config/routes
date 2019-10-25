@@ -1,0 +1,44 @@
+-- By default this file is used by `parseRoutesFile` in Foundation.hs
+-- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
+-- and (advanced stuff) here: https://www.yesodweb.com/book/route-attributes
+
+/static StaticR Static appStatic
+/auth   AuthR   Auth   getAuth
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+-- Full Syntax
+-- Route DataTypeR HTTP_Method HTTP_Method !routeAttribute
+
+-- Basic concept
+/ HomeR GET POST
+
+-- static path
+/path Path GET
+
+-- dynamic path
+/foo/#Int PathPieceR GET
+/bar/#Int/#Int/#Int MultiPathPieceR Get
+
+-- disabling overlap checking
+/first/0 FirstR GET
+!/first/#Int AfterFirstR GET
+
+-- adding route attributes
+/attribute AttributeR Get !attribute
+
+/hierarchialRoute HierarchialR:
+  /route1 Route1R GET
+  /route2 Route2R GET
+  /subhierarchy SubHierarchyR:
+    /final FinalR GET
+
+/hierarchyWithAttribute HierarchyAndAttributeR: !outerHierarchyAttribute
+  /innerRoute InnerRouteR GET
+  /subRoute SubRouteR GET !innerHierarchyAttribute
+    /endRoute EndRouteR GET
+
+/comments CommentR POST
+
+/profile ProfileR GET

@@ -1,0 +1,37 @@
+-- By default this file is used by `persistFileWith` in Model.hs (which is imported by Foundation.hs)
+-- Syntax for this file here: https://github.com/yesodweb/persistent/blob/master/docs/Persistent-entity-syntax.md
+{-
+Table sql=real_table_name
+  columnName DataType default='Foo' sqltype=varchar(3) sql=real_column_name
+  columnNameThatCanBeNull DataType Maybe
+  columnThatIsNullByDefault DataType default=NULL
+  column1 Int
+  column2 Int
+  column3 Int
+  UniqueColumns column1 column2
+  UniqueColumns2 column3
+  deriving Eq Show Ord
+
+ParentTable
+  id Int
+
+ChildTable
+  parentRow ParentTableId constraint=clearer_constraint_name
+
+-}
+
+User
+    ident Text
+    password Text Maybe
+    UniqueUser ident
+    deriving Typeable
+Email
+    email Text
+    userId UserId Maybe
+    verkey Text Maybe
+    UniqueEmail email
+Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived.
+    message Text
+    userId UserId Maybe
+    deriving Eq
+    deriving Show

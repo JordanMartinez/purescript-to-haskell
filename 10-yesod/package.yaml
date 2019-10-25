@@ -1,0 +1,122 @@
+name:    my-yesod
+version: "0.0.0"
+
+# Note: the dependency ranges were removed. I'm relying upon the
+# Stack LTS resolver to ensure these build together.
+dependencies:
+- base
+
+- yesod
+- yesod-core
+- yesod-auth
+- yesod-static
+- yesod-form
+- classy-prelude
+- classy-prelude-conduit
+- classy-prelude-yesod
+- bytestring
+- text
+- persistent
+- persistent-postgresql
+- persistent-template
+- template-haskell
+- shakespeare
+- hjsmin
+- monad-control
+- wai-extra
+- yaml
+- http-client-tls
+- http-conduit
+- directory
+- warp
+- data-default
+- aeson
+- conduit
+- monad-logger
+- fast-logger
+- wai-logger
+- file-embed
+- safe
+- unordered-containers
+- containers
+- vector
+- time
+- case-insensitive
+- wai
+- foreign-store
+
+# The library contains all of our application code. The executable
+# defined below is just a thin wrapper.
+library:
+  source-dirs: src
+  when:
+  - condition: (flag(dev)) || (flag(library-only))
+    then:
+      ghc-options:
+      - -Wall
+      - -Wincomplete-uni-patterns
+      - -Wincomplete-record-updates
+      - -Wmissing-export-lists
+      - -Widentities
+      - -Wredundant-constraints
+      - -Wpartial-fields
+      - -Wcompat
+      - -fprint-expanded-synonyms
+      - -fprint-explicit-foralls
+      - -ferror-spans
+      - -fwarn-tabs
+      - -O0
+      cpp-options: -DDEVELOPMENT
+    else:
+      ghc-options:
+      - -Wall
+      - -Wincomplete-uni-patterns
+      - -Wincomplete-record-updates
+      - -Wmissing-export-lists
+      - -Widentities
+      - -Wredundant-constraints
+      - -Wpartial-fields
+      - -Wcompat
+      - -fprint-expanded-synonyms
+      - -fprint-explicit-foralls
+      - -ferror-spans
+      - -fwarn-tabs
+      - -Werror
+      - -O2
+
+# Runnable executable for our application
+executables:
+  my-yesod:
+    main: main.hs
+    source-dirs: app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - my-yesod
+    when:
+    - condition: flag(library-only)
+      buildable: false
+
+# Test suite
+tests:
+  my-yesod-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options: -Wall
+    dependencies:
+    - my-yesod
+    - hspec
+    - yesod-test
+
+# Define flags used by "yesod devel" to make compilation faster
+flags:
+  library-only:
+    description: Build for use with "yesod devel"
+    manual: false
+    default: false
+  dev:
+    description: Turn on development settings, like auto-reload templates.
+    manual: false
+    default: false
