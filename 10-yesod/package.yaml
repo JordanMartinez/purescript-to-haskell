@@ -6,44 +6,75 @@ version: "0.0.0"
 dependencies:
 - base
 
+# Prelude + TH
+- classy-prelude
+- safe # expose safer wrappers around unsafe Prelude functions
+- template-haskell
+
+# Core: Non Text
+- unordered-containers
+- containers
+- vector
+- time
+
+# Core: Text
+- bytestring
+- text
+- case-insensitive
+
+# Domain: Error-Handling
+- monad-control
+
+# Domain: Loggers
+- monad-logger
+- fast-logger
+
+# Domain: Seralization
+- yaml
+- aeson
+
+# API: Web Application Interface
+- wai
+- wai-extra
+- wai-logger
+
+# Really Unsafe Pointer-based Storage?
+- foreign-store
+
+# Infrastructure: Web Server
+- warp
+- http-client-tls
+
+# Infrastructure: File System
+- directory
+- file-embed
+
+# Infrastructure: Streaming IO
+- conduit
+- classy-prelude-conduit
+- http-conduit
+
+# API/Infrastructure: Database
+- persistent
+- persistent-postgresql
+- persistent-template
+
+# Hamlet, Julius, Cassius/Lucius
+- shakespeare
+
+# JS Minifier
+- hjsmin
+
+# Default Type Class
+- data-default
+
+# Yesod
 - yesod
 - yesod-core
 - yesod-auth
 - yesod-static
 - yesod-form
-- classy-prelude
-- classy-prelude-conduit
 - classy-prelude-yesod
-- bytestring
-- text
-- persistent
-- persistent-postgresql
-- persistent-template
-- template-haskell
-- shakespeare
-- hjsmin
-- monad-control
-- wai-extra
-- yaml
-- http-client-tls
-- http-conduit
-- directory
-- warp
-- data-default
-- aeson
-- conduit
-- monad-logger
-- fast-logger
-- wai-logger
-- file-embed
-- safe
-- unordered-containers
-- containers
-- vector
-- time
-- case-insensitive
-- wai
-- foreign-store
 
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
