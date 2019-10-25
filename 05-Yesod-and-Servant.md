@@ -16,7 +16,7 @@ See how Yesod and Servant compare with other frameworks via the [TechEmpower Fra
 
 ### Both
 
-
+- `warp` functions very similiarly to [`purescript-httpure`](https://www.aosabook.org/en/posa/warp.html)
 
 ### Yesod
 
