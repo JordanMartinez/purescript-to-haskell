@@ -1,4 +1,4 @@
-# purescript-to-haskell
+# Purescript-to-Haskell
 
 ## Purpose of this Repository
 
