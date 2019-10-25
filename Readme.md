@@ -31,6 +31,12 @@ See the [Table of Contents file](https://github.com/JordanMartinez/purescript-to
 - Teach PureScript to a Haskell programmer
 - Rewrite what has already been written
 
+## Real World Demos of Yesod and Servant
+
+- [Real World - Yesod (server) + Persistent-created SQL](https://github.com/tzemanovic/haskell-yesod-realworld-example-app)
+- [Real World - Servant (server) + hand-written SQL](https://github.com/dorlowd/haskell-servant-realworld-example-app)
+- [Real World - Servant (server) + BEAM-created SQL](https://github.com/boxyoman/haskell-realworld-example)
+
 ## How I got Here
 
 I spent the previous year [learning PureScript using the Feynman Technique](https://github.com/jordanmartinez/purescript-jordans-reference), so that I could build websites and applications that
