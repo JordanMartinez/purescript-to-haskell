@@ -28,18 +28,18 @@ Haskell's Package Version Policy: MAJOR.MAJOR.MINOR.PATCH
 
 See [Haskell PVP FAQ](https://pvp.haskell.org/faq/) for a good explanation.
 
-#### Use `hpack` to generate `.cabal` files via `.package.yml` files
+#### Use `hpack` to generate `.cabal` files via `package.yml` files
 
 `.cabal` files store metadata about a package (e.g. author, contact info, dependencies, language extensions enabled by default, etc.). This is the file format used in the upcoming build tools. Unfortunately, the file format used by `.cabal` is verbose.
 
-[`hpack`](https://github.com/sol/hpack#readme) is a tool that can read and use `.package.yml` files to produce valid `.cabal` files. `.package.yml` files come with three advantages over `.cabal` files. They...
+[`hpack`](https://github.com/sol/hpack#readme) is a tool that can read and use `package.yml` files to produce valid `.cabal` files. `package.yml` files come with three advantages over `.cabal` files. They...
 > Don't require the user to state the obvious; make sensible assumptions by default
 > Give the user 100% control when needed
 > Don't require the user to repeat things; facilitate DRY-ness
 
-As we'll see in the "Syntax" folder, there are a lot of language extensions you will likely want to enable. Moreover, there are GHC options you will likely want to turn on by default. Rather than enabling each extension in each file or including each GHC option in the CLI, it can be easier to add these across the entire project via your `.package.yml` file.
+As we'll see in the "Syntax" folder, there are a lot of language extensions you will likely want to enable. Moreover, there are GHC options you will likely want to turn on by default. Rather than enabling each extension in each file or including each GHC option in the CLI, it can be easier to add these across the entire project via your `package.yml` file.
 
-Both `cabal` (lowercased 'c') and `stack` utilize the `.cabal` file. So, it's often better to edit your `.package.yml` file, use `hpack` to generate a valid `.cabal` file, and let the tools use that generated `.cabal` file.
+Both `cabal` (lowercased 'c') and `stack` utilize the `.cabal` file. So, it's often better to edit your `package.yml` file, use `hpack` to generate a valid `.cabal` file, and let the tools use that generated `.cabal` file.
 
 #### Cabal and Stack
 
