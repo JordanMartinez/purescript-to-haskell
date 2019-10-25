@@ -4,8 +4,6 @@
 
 [Via the Feynman Technique](https://medium.com/taking-note/learning-from-the-feynman-technique-5373014ad230), this repository exists to help me understand how to use Haskell on the backend via Yesod or Servant with the goal of using PureScript on the front-end, and to help anyone else who is walking along a similar path.
 
-See how Yesod and Servant compare with other frameworks via the [TechEmpower Framework Benchmakrs](https://www.techempower.com/benchmarks/). As always, take these benchmarks with a grain of salt and read over their [methodology for producing these results](https://www.techempower.com/benchmarks/#section=motivation&hw=ph&test=fortune).
-
 See the [Table of Contents file](https://github.com/JordanMartinez/purescript-to-haskell/blob/master/table-of-contents.md).
 
 ### Goals of this library
@@ -30,12 +28,6 @@ See the [Table of Contents file](https://github.com/JordanMartinez/purescript-to
 - Teach one how to use Haskell or the functional paradigm
 - Teach PureScript to a Haskell programmer
 - Rewrite what has already been written
-
-## Real World Demos of Yesod and Servant
-
-- [Real World - Yesod (server) + Persistent-created SQL](https://github.com/tzemanovic/haskell-yesod-realworld-example-app)
-- [Real World - Servant (server) + hand-written SQL](https://github.com/dorlowd/haskell-servant-realworld-example-app)
-- [Real World - Servant (server) + BEAM-created SQL](https://github.com/boxyoman/haskell-realworld-example)
 
 ## How I got Here
 
