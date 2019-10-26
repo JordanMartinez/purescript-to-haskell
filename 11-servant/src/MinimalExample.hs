@@ -33,7 +33,7 @@ fooR = pure "foo value"
 type Routes = HomeR :<|> FooR
 
 server :: Server Routes
-server = homeR <|> fooR
+server = homeR :<|> fooR
 
 
 routesProxy :: Proxy Routes

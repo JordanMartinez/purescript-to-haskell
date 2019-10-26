@@ -46,6 +46,8 @@ type ReturnType' = String
 
 -- 3 standard framing strategies
 
+type ContentType = PlainText
+
 type StreamingRouteNewlineFraming
   = StreamGet NewlineFraming ContentType (SourceIO ReturnType')
 
@@ -66,9 +68,9 @@ type RootRoute = Get '[PlainText, JSON, FormUrlEncoded, OctetStream] ReturnType
 
 -- GET request on the `/` path which returns a stream of
 --    `ReturnType` values as PlainText.
-type RootRoute = StreamGet NoFraming PlainText ReturnType
+type RootRoute' = StreamGet NoFraming PlainText ReturnType
 
-rootRouteServer :: Server ReturnType
+rootRouteServer :: ServerT ReturnType Handler
 rootRouteServer = pure "home"
 
 -- /singlePiece
@@ -96,8 +98,8 @@ type HierarchialRoute
     (  "route1" :> Get '[PlainText] String
   :<|> "route2" :> Get '[PlainText] String
   :<|> "subhierarchy" :>
-       (  "routeA" Get '[PlainText] String
-     :<|> "routeB" Get '[PlainText] String
+       (  "routeA" :> Get '[PlainText] String
+     :<|> "routeB" :> Get '[PlainText] String
        )
    )
 
@@ -122,10 +124,16 @@ type MultiFlagQuery
       :> QueryFlag "third"
       :> Get '[PlainText] String
 
+type QueryParameterValue = String
+
 -- /singleKeyValueQuery?key=value1
 type SingleKeyValueQuery
   = "singleKeyValueQuery"
       :> QueryParam "key" QueryParameterValue :> Get '[PlainText] String
+
+type QueryParameterValue1 = String
+type QueryParameterValue2 = String
+type QueryParameterValue3 = String
 
 -- /multiKeyValueQuery?key1=value1&key2=value2&key3=value3
 type MultiKeyValueQuery
@@ -135,7 +143,7 @@ type MultiKeyValueQuery
       :> QueryParam "key3" QueryParameterValue3
       :> Get '[PlainText] String
 
-type ManyParameterValues
+data ManyParameterValues
   = MpvValueA
   | MpvValueB
   | MpvValueC
@@ -192,7 +200,7 @@ type RemainingRoute = "inner" :> Get '[PlainText] String
 type FullRoute = PrefixedRoute RemainingRoute
 
 -- /prefix/prefix
-type NoMoreRoutes = PrefixedRoute (PrefixedRoute EmptyApi)
+type NoMoreRoutes = PrefixedRoute (PrefixedRoute EmptyAPI)
 
 -- ### Catch-All Match
 
@@ -215,7 +223,7 @@ DELETE /foo/bar/:id
 -- Modular Approach
 type FooBar remaining = "foo" :> "bar" :> remaining
 type FooBarRoutes
-  =    (QueryParm "key" String :> GET '[PlainText] String)
+  =    (QueryParam "key" String :> Get '[PlainText] String)
   :<|> (Header "My-Header" Int :> Post '[PlainText] String)
   :<|> (ReqBody '[JSON] Int :> Put '[JSON] Int)
   :<|> (Capture "id" Int :> Delete '[JSON] Int)
@@ -234,7 +242,7 @@ DELETE /foo/bar/:id
 -- Full approach
 type FooBarFullApproach =
   "foo" :> "bar" :>
-      (  (QueryParm "key" String :> GET '[PlainText] String)
+      (  (QueryParam "key" String :> Get '[PlainText] String)
     :<|> (Header "My-Header" Int :> Post '[PlainText] String)
     :<|> (ReqBody '[JSON] Int :> Put '[JSON] Int)
     :<|> (Capture "id" Int :> Delete '[JSON] Int)
@@ -263,6 +271,7 @@ type RouteOrderAndPossibleSyntax =
                   ]
          ReturnType)
 
+{-
 startApp :: IO ()
 startApp = run 8080 app
 
@@ -274,3 +283,5 @@ routesProxy = Proxy
 
 server :: Server Routes
 server = pure "foo"
+
+-}
