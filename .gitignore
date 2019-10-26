@@ -22,3 +22,7 @@ regen-toc.sh
 10-yesod/*~
 10-yesod/\#*
 10-yesod/my-yesod.cabal
+
+11-servant/.stack-work/
+11-servant/my-servant.cabal
+11-servant/*~
