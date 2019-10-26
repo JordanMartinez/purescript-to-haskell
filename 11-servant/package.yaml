@@ -22,6 +22,10 @@ dependencies:
 - base
 - aeson
 - servant-server
+- persistent
+- persistent-postgresql
+- persistent-template
+- template-haskell
 - wai
 - warp
 
