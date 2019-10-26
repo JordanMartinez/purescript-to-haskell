@@ -2,8 +2,9 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE TypeOperators   #-}
 module ServantSyntax
-    ( startApp
-    , app
+    (
+    -- startApp
+    -- app
     ) where
 
 import Data.Aeson
@@ -70,7 +71,7 @@ type RootRoute = Get '[PlainText, JSON, FormUrlEncoded, OctetStream] ReturnType
 --    `ReturnType` values as PlainText.
 type RootRoute' = StreamGet NoFraming PlainText ReturnType
 
-rootRouteServer :: ServerT ReturnType Handler
+rootRouteServer :: Server RootRoute
 rootRouteServer = pure "home"
 
 -- /singlePiece
