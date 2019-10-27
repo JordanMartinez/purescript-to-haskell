@@ -38,14 +38,6 @@ data XServerError = XServerError
     }
   deriving (Show, Eq, Read, Typeable)
 
--- data User = User
---   { userId        :: Int
---   , userFirstName :: String
---   , userLastName  :: String
---   } deriving (Eq, Show)
---
--- $(deriveJSON defaultOptions ''User)
-
 -- ## Servant's Type-Level Route Syntax
 
 -- ### Syntax for Specifying HTTP Method Used in Request
@@ -440,17 +432,12 @@ routeOrderAndPossibleSyntax = handleRoute
     handleRoute capturedInt maybeParamValue heavyFlag reqHeader reqBody =
       pure (addHeader 5 "request body")
 
-{-
-startApp :: IO ()
-startApp = run 8080 app
+-- ## Using Template Haskell to derive JSON instances for a data type
 
-app :: Application
-app = serve routesProxy server
+data User = User
+  { userId        :: Int
+  , userFirstName :: String
+  , userLastName  :: String
+  } deriving (Eq, Show)
 
-routesProxy :: Proxy Routes
-routesProxy = Proxy
-
-server :: Server Routes
-server = pure "foo"
-
--}
+$(deriveJSON defaultOptions ''User)
