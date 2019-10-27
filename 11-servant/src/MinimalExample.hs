@@ -17,19 +17,23 @@ These routes were made to look more like Yesod's in the following ways:
 - Routes have an 'R' suffix to indicate they are a route
 - A route's corresponding handler is defined immediately below it
 -}
--- -
+
+-- GET /
 type HomeR = Get '[PlainText] String
 
 homeR :: Handler String
 homeR = pure "Hello world!"
 
 
+-- GET /foo
 type FooR = "foo" :> Get '[PlainText] String
 
 fooR :: Handler String
 fooR = pure "foo value"
 
 
+-- GET /
+-- GET /foo
 type Routes = HomeR :<|> FooR
 
 server :: Server Routes
