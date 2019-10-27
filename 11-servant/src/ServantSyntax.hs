@@ -12,6 +12,31 @@ import Data.Aeson.TH
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
+import Data.List (foldl')
+
+-- ## Type Definitions for Servant
+
+newtype ExceptT_ error monad output
+   = ExceptT_ (monad (Either error output))
+-- ~           IO (Either error output)
+
+newtype Handler_ output
+   = Handler (ExceptT_ ServerError IO output)
+-- ~          ExceptT_ (IO (Either ServerError output)
+-- ~                    IO (Either ServerError output)
+
+-- Definition of ServerError with 'X' prefixing all of its named entities
+-- to prevent name clash in this file
+-- Rather than creating this each time, one should use the default values
+-- (e.g. `err500`) and override the specific part they need (e.g. add headers,
+-- change the reason phrase, add a body, etc.).
+data XServerError = XServerError
+    { xerrHTTPCode     :: Int
+    , xerrReasonPhrase :: String
+    , xerrBody         :: LBS.ByteString
+    , xerrHeaders      :: [HTTP.Header]
+    }
+  deriving (Show, Eq, Read, Typeable)
 
 -- data User = User
 --   { userId        :: Int
@@ -77,9 +102,15 @@ rootRouteServer = pure "home"
 -- /singlePiece
 type SinglePathPieceRoute = "singlePiece" :> Get '[PlainText] ReturnType
 
+singlePathPieceR :: Server SinglePathPieceRoute
+singlePathPieceR = pure "single piece"
+
 -- Route acts like a "product type"
 -- /piece1/piece2
 type MultiPathPieceRoute = "piece1" :> "piece2" :> Get '[PlainText] ReturnType
+
+multiPathPieceR :: Server MultiPathPieceRoute
+multiPathPieceR = pure "multi piece"
 
 -- Route acts like a "sum type"
 -- /first
@@ -87,6 +118,15 @@ type MultiPathPieceRoute = "piece1" :> "piece2" :> Get '[PlainText] ReturnType
 type TwoPossibleRoutes
   =    "first"  :> Get '[PlainText] ReturnType
   :<|> "second" :> Get '[PlainText] ReturnType
+
+twoPossibleRoutes :: Server TwoPossibleRoutes
+twoPossibleRoutes = first :<|> second
+  where
+    first :: Handler ReturnType
+    first = pure "first"
+
+    second :: Handler ReturnType
+    second = pure "second"
 
 
 -- Route acts like a tree: same parent piece with different children pieces
@@ -104,15 +144,44 @@ type HierarchialRoute
        )
    )
 
+hierarchialRoute :: Server HierarchialRoute
+hierarchialRoute = route1 :<|> route2 :<|> routeA :<|> routeB
+  where
+    route1 :: Handler String
+    route1 = pure "route 1"
+
+    route2 :: Handler String
+    route2 = pure "route 2"
+
+    routeA :: Handler String
+    routeA = pure "route A"
+
+    routeB :: Handler String
+    routeB = pure "route B"
+
 -- ### Syntax for Extracting Information from the Path
 
 -- /user/:userId    (e.g. "/user/4" )
 type UserIdCaptureRoute = "user" :> Capture "id" Int :> Get '[PlainText] String
 
+userIdCaptureRoute :: Server UserIdCaptureRoute
+userIdCaptureRoute = idRoute
+  where
+    idRoute :: Int -> Handler String
+    idRoute a = pure (show a)
+
+
    -- /flagQuery       -- "heavy" is false because route doesn't include it
    -- /flagQuery?heavy -- "heavy" is true because route includes it
 type SingleFlagQuery
   = "flagQuery" :> QueryFlag "heavy" :> Get '[PlainText] String
+
+singleFlagQuery :: Server SingleFlagQuery
+singleFlagQuery = handleRoute
+  where
+  handleRoute :: Bool -> Handler String
+  handleRoute b = pure (show b)
+
 
 -- Various combinations
 -- /flagQuery?first=&second=&third=
@@ -125,12 +194,25 @@ type MultiFlagQuery
       :> QueryFlag "third"
       :> Get '[PlainText] String
 
+multiFlagQuery :: Server MultiFlagQuery
+multiFlagQuery = handleFlag
+  where
+  handleFlag :: Bool -> Bool -> Bool -> Handler String
+  handleFlag first second third =
+    pure $ show first <>  " " <> show second <> " " <> show third
+
 type QueryParameterValue = String
 
 -- /singleKeyValueQuery?key=value1
 type SingleKeyValueQuery
   = "singleKeyValueQuery"
       :> QueryParam "key" QueryParameterValue :> Get '[PlainText] String
+
+singleKeyValueQuery :: Server SingleKeyValueQuery
+singleKeyValueQuery = handleRoute
+  where
+    handleRoute :: Maybe QueryParameterValue -> Handler String
+    handleRoute keyValue = pure ("key value was: " <> show keyValue)
 
 type QueryParameterValue1 = String
 type QueryParameterValue2 = String
@@ -144,45 +226,80 @@ type MultiKeyValueQuery
       :> QueryParam "key3" QueryParameterValue3
       :> Get '[PlainText] String
 
+multiKeyValueQuery :: Server MultiKeyValueQuery
+multiKeyValueQuery = handleRoute
+  where
+    handleRoute
+      :: Maybe QueryParameterValue1
+      -> Maybe QueryParameterValue2
+      -> Maybe QueryParameterValue3
+      -> Handler String
+    handleRoute value1 value2 value3 = pure (show value1 <> show value2 <> show value3)
+
 data ManyParameterValues
   = MpvValueA
   | MpvValueB
   | MpvValueC
   | MpvValueD
+  deriving Show
 
 -- /singleKeyWithMultiValue?key={mpvvaluea, mpvvalueb, mpvvaluec, mpvvalued}
 type SingleKeyWithMultiValueQuery
   = "singleKeyWithMultiValue"
-    :> QueryParams "key" QueryParameterValue :> Get '[PlainText] String
+    :> QueryParams "key" ManyParameterValues :> Get '[PlainText] String
+
+singleKeyWithMultiValueQuery :: Server SingleKeyWithMultiValueQuery
+singleKeyWithMultiValueQuery = handleRoute
+  where
+    handleRoute :: [ManyParameterValues] -> Handler String
+    handleRoute values = pure ("string" <> foldl' (\acc next -> acc <> show next) "" values)
 
 -- ### Syntax for Extracting Information from the Request
 
 -- #### Request Headers
 
-type DecodedHeaderValue = String
+type DecodedRequestHeaderValue = String
 
-type RouteWithHeader
-  = "requestHeaders" :> Header "User-Agent" DecodedHeaderValue
+type RouteWithRequestHeader
+  = "requestHeaders" :> Header "User-Agent" DecodedRequestHeaderValue
                      :> Get '[PlainText] String
+
+routeWithRequestHeader :: Server RouteWithRequestHeader
+routeWithRequestHeader = handleRoute
+  where
+  handleRoute :: Maybe DecodedRequestHeaderValue -> Handler String
+  handleRoute decodedHeaderValue = pure (show decodedHeaderValue <> " some stuff")
 
 -- #### Request Body
 
-type DecodedBodyValue = String
+type DecodedRequestBodyValue = String
 
-type DecodedBody
-  = "requestBody" :> ReqBody '[PlainText] DecodedBodyValue
+type DecodedRequestBody
+  = "requestBody" :> ReqBody '[PlainText] DecodedRequestBodyValue
                   :> Get '[PlainText] String
+
+decodedRequestBody :: Server DecodedRequestBody
+decodedRequestBody = handleRoute
+  where
+  handleRoute :: DecodedRequestBodyValue -> Handler String
+  handleRoute decodedBody = pure (decodedBody <> " is some body")
 
 -- ### Syntax for Specifying Things in Response
 
 -- #### Response Headers
 
-type EncodedHeaderValue = Int
+type ResponseHeaderValue = Int
 
 type SingleResponseHeader
   = "singleResponseHeader"
     :> Get '[PlainText]
-        ( Headers '[ Header "My-Header" EncodedHeaderValue ] ReturnType )
+        ( Headers '[ Header "My-Header" ResponseHeaderValue ] ReturnType )
+
+singleResponseHeader :: Server SingleResponseHeader
+singleResponseHeader = handleRoute
+  where
+  handleRoute :: Handler (Headers '[ Header "My-Header" ResponseHeaderValue ] ReturnType)
+  handleRoute = pure (addHeader 5 "response body")
 
 type MultiResponseHeader
   = "multiResponseHeader"
@@ -191,6 +308,15 @@ type MultiResponseHeader
                                    ]
                          ReturnType
                         )
+multiResponseHeader :: Server MultiResponseHeader
+multiResponseHeader = handleRoute
+  where
+  handleRoute :: Handler ( Headers '[ Header "First-Header" EncodedHeaderValue
+                                    , Header "Header-Two" EncodedHeaderValue
+                                    ]
+                          ReturnType
+                         )
+  handleRoute = pure (addHeader 10 $ addheader 20 "response body")
 
 -- ### Creating Prefixes to Routes
 
@@ -211,6 +337,18 @@ type TryDifferentRouter =
   :<|> Raw -- indicates anything that hasn't matched thus far
            -- should be handled as a WAI Application
            -- (e.g. another web application, static file server, etc.)
+
+tryDifferentRouter :: Server TryDifferentRouter
+tryDifferentRouter = tryFirst :<|> trySecond :<|> handleRaw
+  where
+  tryFirst :: Handler String
+  tryFirst = pure "first"
+
+  trySecond :: Handler String
+  trySecond = pure "second"
+
+  serveStatciFilesViaDirectory :: Handler Raw
+  serveStatciFilesViaDirectory = serveDirectoryFileServer "/var/www/"
 
 -- ## Modeling Complex Routes
 
@@ -249,6 +387,25 @@ type FooBarFullApproach =
     :<|> (Capture "id" Int :> Delete '[JSON] Int)
       )
 
+fooBarFullApproach :: Server FooBarFullApproach
+fooBarFullApproach =
+       getStringWithKeyParam
+  :<|> postStringHeaderInt
+  :<|> putJsonIntReqbodyJsonInt
+  :<|> deleteIntCaptureInt
+  where
+    getStringWithKeyParam :: Maybe String -> Handler String
+    getStringWithKeyParam value = pure (show value <> " and other stuff")
+
+    postStringHeaderInt :: Int -> Handler string
+    postStringHeaderInt intHeader = pure (show intHeader <> " and some other stuff")
+
+    putJsonIntReqbodyJsonInt :: Int -> Handler Int
+    putJsonIntReqbodyJsonInt decodedIntValue = pure decodedIntValue
+
+    deleteIntCaptureInt :: Int -> Handler Int
+    deleteIntCaptureInt capturedIntValue = pure capturedIntValue
+
 -- ## Full Syntax
 
 -- GET http://example.com/staticPathPiece/:pieceName?key=4&heavy
@@ -271,6 +428,17 @@ type RouteOrderAndPossibleSyntax =
         (Headers '[ Header "Response-Header" EncodedHeaderValue
                   ]
          ReturnType)
+
+routeOrderAndPossibleSyntax :: Server RouteOrderAndPossibleSyntax
+routeOrderAndPossibleSyntax = handleRoute
+  where
+    handleRoute
+      :: Int -> Maybe Int -> Bool -> Maybe DecodedHeaderValue -> DecodedBodyValue
+      -> Handler (Headers '[ Header "Response-Header" EncodedHeaderValue
+                           ]
+                  ReturnType)
+    handleRoute capturedInt maybeParamValue heavyFlag reqHeader reqBody =
+      pure (addHeader 5 "request body")
 
 {-
 startApp :: IO ()
