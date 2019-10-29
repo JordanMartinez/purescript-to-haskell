@@ -26,3 +26,5 @@ regen-toc.sh
 **/*servant/.stack-work/
 **/*servant/*.cabal
 **/*servant/*~
+
+**/.spago
