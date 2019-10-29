@@ -353,10 +353,13 @@ GET /foo/bar?key=value
 POST /foo/bar -- request header has custome header
 PUT /foo/bar -- request body stores JSON; response returns JSON
 DELETE /foo/bar/:id
+GET /path/to/static/file.html
 -}
 
 -- Modular Approach
-type FooBar remaining = "foo" :> "bar" :> remaining
+type FooBar remaining =
+       ("foo" :> "bar" :> remaining)
+  :<|> Raw
 type FooBarRoutes
   =    (QueryParam "key" String :> Get '[PlainText] String)
   :<|> (Header "My-Header" Int :> Post '[PlainText] String)
@@ -372,16 +375,18 @@ GET /foo/bar?key=value
 POST /foo/bar -- request header has custome header
 PUT /foo/bar -- request body stores JSON; response returns JSON
 DELETE /foo/bar/:id
+GET /path/to/static/file.html
 -}
 
 -- Full approach
 type FooBarFullApproach =
-  "foo" :> "bar" :>
+  ("foo" :> "bar" :>
       (  (QueryParam "key" String :> Get '[PlainText] String)
     :<|> (Header "My-Header" Int :> Post '[PlainText] String)
     :<|> (ReqBody '[JSON] Int :> Put '[JSON] Int)
     :<|> (Capture "id" Int :> Delete '[JSON] Int)
       )
+  ) :<|> Raw
 
 fooBarFullApproach :: Server FooBarFullApproach
 fooBarFullApproach =
@@ -389,6 +394,7 @@ fooBarFullApproach =
   :<|> postStringHeaderInt
   :<|> putJsonIntReqbodyJsonInt
   :<|> deleteIntCaptureInt
+  :<|> serveStaticFiles
   where
     getStringWithKeyParam :: Maybe String -> Handler String
     getStringWithKeyParam value = pure (show value <> " and other stuff")
@@ -401,6 +407,9 @@ fooBarFullApproach =
 
     deleteIntCaptureInt :: Int -> Handler Int
     deleteIntCaptureInt capturedIntValue = pure capturedIntValue
+
+    serveStaticFiles :: Server Raw -- Server, not Handler, for Raw
+    serveStaticFiles = serveStaticFilesViaDirectory "/var/www/"
 
 -- ## Full Syntax
 
