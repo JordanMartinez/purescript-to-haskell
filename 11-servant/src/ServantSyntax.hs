@@ -295,16 +295,16 @@ singleResponseHeader = handleRoute
 
 type MultiResponseHeader
   = "multiResponseHeader"
-    :> Get '[PlainText] ( Headers '[ Header "First-Header" EncodedHeaderValue
-                                   , Header "Header-Two" EncodedHeaderValue
+    :> Get '[PlainText] ( Headers '[ Header "First-Header" ResponseHeaderValue
+                                   , Header "Header-Two" ResponseHeaderValue
                                    ]
                          ReturnType
                         )
 multiResponseHeader :: Server MultiResponseHeader
 multiResponseHeader = handleRoute
   where
-  handleRoute :: Handler ( Headers '[ Header "First-Header" EncodedHeaderValue
-                                    , Header "Header-Two" EncodedHeaderValue
+  handleRoute :: Handler ( Headers '[ Header "First-Header" ResponseHeaderValue
+                                    , Header "Header-Two" ResponseHeaderValue
                                     ]
                           ReturnType
                          )
@@ -414,10 +414,10 @@ type RouteOrderAndPossibleSyntax =
     :> Capture "pieceName" Int
     :> QueryParam "key" Int
     :> QueryFlag "heavy"
-    :> Header "Request-Header" DecodedHeaderValue
-    :> ReqBody '[PlainText] DecodedBodyValue
+    :> Header "Request-Header" DecodedRequestHeaderValue
+    :> ReqBody '[PlainText] DecodedRequestBodyValue
     :> Get '[PlainText]
-        (Headers '[ Header "Response-Header" EncodedHeaderValue
+        (Headers '[ Header "Response-Header" ResponseHeaderValue
                   ]
          ReturnType)
 
@@ -425,8 +425,8 @@ routeOrderAndPossibleSyntax :: Server RouteOrderAndPossibleSyntax
 routeOrderAndPossibleSyntax = handleRoute
   where
     handleRoute
-      :: Int -> Maybe Int -> Bool -> Maybe DecodedHeaderValue -> DecodedBodyValue
-      -> Handler (Headers '[ Header "Response-Header" EncodedHeaderValue
+      :: Int -> Maybe Int -> Bool -> Maybe DecodedRequestHeaderValue -> DecodedRequestBodyValue
+      -> Handler (Headers '[ Header "Response-Header" ResponseHeaderValue
                            ]
                   ReturnType)
     handleRoute capturedInt maybeParamValue heavyFlag reqHeader reqBody =
