@@ -372,7 +372,7 @@ type FooBarFullRoute = FooBar FooBarRoutes
 -- Same as above
 
 GET /foo/bar?key=value
-POST /foo/bar -- request header has custome header
+POST /foo/bar -- request header has custom header
 PUT /foo/bar -- request body stores JSON; response returns JSON
 DELETE /foo/bar/:id
 GET /path/to/static/file.html
