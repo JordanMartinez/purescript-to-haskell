@@ -1,0 +1,27 @@
+ghc-options:
+- -Wall
+- -Wincomplete-uni-patterns
+- -Wincomplete-record-updates
+- -Wmissing-export-lists
+- -Widentities
+- -Wredundant-constraints
+- -Wpartial-fields
+- -Wcompat
+
+- -Werror
+
+- -fprint-expanded-synonyms
+- -fprint-explicit-foralls
+- -ferror-spans
+
+
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/using-optimisation.html#o-convenient-packages-of-optimisation-flags
+
+foo -flagForProgram +RTS -flagForRTS -RTS -flagForProgram
+
+foo -flagForProgram (-flagForRTS) -flagForProgram
+
+
+https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/sooner.html
+
+document PRAGMAs and that they have to go above 'module' keyword
