@@ -82,10 +82,10 @@ library:
   - EmptyDataDecls
   - OverloadedLists
   - OverloadedStrings
-  - NumericLiterals
+  - NumericUnderscores
   - NegativeLiterals
-  - MultiParameterTypeClasses
-  - ConstrainedClassmethods
+  - MultiParamTypeClasses
+  - ConstrainedClassMethods
   - FlexibleInstances
   - FlexibleContexts
   - FunctionalDependencies

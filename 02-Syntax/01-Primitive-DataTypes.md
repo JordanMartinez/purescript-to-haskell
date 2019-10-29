@@ -175,14 +175,14 @@ type MyType (functor :: * -> *) a = a
 
 ## Empty Data Types
 
-PureScript can define data types that don't have a constructor (usually for phantom types that tag something at the type-level). Haskell requires the `EmptyDataDecl` language extension to be enabled.
+PureScript can define data types that don't have a constructor (usually for phantom types that tag something at the type-level). Haskell requires the `EmptyDataDecls` language extension to be enabled.
 
 ```purescript
 data PhantomType_NoConstructors
 ```
 
 ```haskell
-{-# LANGUAGE EmptyDataDecl #-}
+{-# LANGUAGE EmptyDataDecls #-}
 
 data PhantomType_NoConstructors
 ```
@@ -507,7 +507,7 @@ aNumber2 = 4.0
 
 #### Underscore Syntax Sugar for Ints and Numbers
 
-Since its `0.13.0` release, PureScript allows the usage of underscores to make numeric values more readable. Haskell allows this, too, but only if the `NumericLiterals` language extension is enabled.
+Since its `0.13.0` release, PureScript allows the usage of underscores to make numeric values more readable. Haskell allows this, too, but only if the `NumericUnderscores` language extension is enabled.
 
 ```purescript
 readableInt :: Int
@@ -518,7 +518,7 @@ readableNumber = 1_000_000.0
 ```
 
 ```haskell
-{-# LANGUAGE NumericLiterals #-}
+{-# LANGUAGE NumericUnderscores #-}
 readableInt :: Int
 readableInt = 1_000_000
 

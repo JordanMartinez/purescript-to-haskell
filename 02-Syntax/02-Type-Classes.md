@@ -47,14 +47,14 @@ class (RequiredTypeClass1 a, RequiredTypeClass2 a {-, ... -}) => TheTypeClass a 
 
 ### Empty Type Classes
 
-Haskell requires you to enable the `MultiParameterTypeClasses` language extension to define an empty type class. PureScript's definition works out-of-box.
+Haskell requires you to enable the `MultiParamTypeClasses` language extension to define an empty type class. PureScript's definition works out-of-box.
 
 ```purescript
 class EmptyTypeClass
 ```
 
 ```haskell
-{-# LANGUAGE MultiParameterTypeClasses #-}
+  {-# LANGUAGE MultiParamTypeClasses #-}
 class EmptyTypeClass
 ```
 
@@ -83,7 +83,7 @@ class SomeClass a where
 
 #### Without Functional Dependencies
 
-Haskell requires you to enable the `MultiParameterTypeClasses` language extension to define a type class with multiple parameters. PureScript's definition works out-of-box.
+Haskell requires you to enable the `MultiParamTypeClasses` language extension to define a type class with multiple parameters. PureScript's definition works out-of-box.
 
 ```purescript
 class MultiParameterTypeClass type1 type2 {- typeN -} where
@@ -91,7 +91,7 @@ class MultiParameterTypeClass type1 type2 {- typeN -} where
 ```
 
 ```haskell
-{-# LANGUAGE MultiParameterTypeClasses #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 class MultiParameterTypeClass type1 type2 {- typeN -} where
   functionName1 :: type1 -> type2 -> {- typeN -> -} ReturnType
 ```
@@ -100,7 +100,7 @@ class MultiParameterTypeClass type1 type2 {- typeN -} where
 
 PureScript's definition works out-of-box. Haskell requires you to enable the `FunctionalDependencies` language extensions to define a type class with functional dependencies between its multiple parameters. In addition, you might need to enable the `UndecidableInstances` language extension when using functional dependencies; otherwise, the compiler might think your instances are invalid.
 
-Note: enabling Haskell's `FunctionalDependencies` language extension implies enabling the `MultiParameterTypeClasses` language extension.
+Note: enabling Haskell's `FunctionalDependencies` language extension implies enabling the `MultiParamTypeClasses` language extension.
 
 ```purescript
 class ManyTypesDetermineAnotherType a b c | a b {- n -} -> c  where
@@ -115,7 +115,7 @@ class ManyFDRelationships a b c | a b -> c, c -> a b where
 
 ```haskell
 {-# LANGUAGE FunctionalDependencies #-}
--- ^ implies {-# LANGUAGE MultiParameterTypeClasses #-}
+-- ^ implies {-# LANGUAGE MultiParamTypeClasses #-}
 
 class ManyTypesDetermineAnotherType a b c | a b {- n -} -> c  where
   functionName2 :: a b -> c
@@ -280,7 +280,7 @@ instance multiIntBooleanChar :: Multi Int Boolean Char where
 ```
 
 ```haskell
-{-# LANGUAGE MultiParameterTypeClasses #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 class Multi one two three where
   multiFunction :: one -> two -> three -> String
 
