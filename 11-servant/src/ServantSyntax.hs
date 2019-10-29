@@ -9,6 +9,9 @@ module ServantSyntax
 
 import Data.Aeson
 import Data.Aeson.TH
+import qualified Data.ByteString.Lazy as LBS
+import qualified Network.HTTP.Types.Header as HTTP
+import Data.Typeable (Typeable)
 import Network.Wai
 import Network.Wai.Handler.Warp
 import Servant
@@ -308,7 +311,7 @@ multiResponseHeader = handleRoute
                                     ]
                           ReturnType
                          )
-  handleRoute = pure (addHeader 10 $ addheader 20 "response body")
+  handleRoute = pure (addHeader 10 $ addHeader 20 "response body")
 
 -- ### Creating Prefixes to Routes
 
@@ -331,7 +334,7 @@ type TryDifferentRouter =
            -- (e.g. another web application, static file server, etc.)
 
 tryDifferentRouter :: Server TryDifferentRouter
-tryDifferentRouter = tryFirst :<|> trySecond :<|> handleRaw
+tryDifferentRouter = tryFirst :<|> trySecond :<|> serveStaticFilesViaDirectory
   where
   tryFirst :: Handler String
   tryFirst = pure "first"
@@ -339,8 +342,9 @@ tryDifferentRouter = tryFirst :<|> trySecond :<|> handleRaw
   trySecond :: Handler String
   trySecond = pure "second"
 
-  serveStatciFilesViaDirectory :: Handler Raw
-  serveStatciFilesViaDirectory = serveDirectoryFileServer "/var/www/"
+  -- Note: this type signature isn't Handler Raw, lest we get a compiler error.
+  serveStaticFilesViaDirectory :: Server Raw
+  serveStaticFilesViaDirectory = serveDirectoryFileServer "/var/www/"
 
 -- ## Modeling Complex Routes
 
@@ -389,7 +393,7 @@ fooBarFullApproach =
     getStringWithKeyParam :: Maybe String -> Handler String
     getStringWithKeyParam value = pure (show value <> " and other stuff")
 
-    postStringHeaderInt :: Int -> Handler string
+    postStringHeaderInt :: Maybe Int -> Handler String
     postStringHeaderInt intHeader = pure (show intHeader <> " and some other stuff")
 
     putJsonIntReqbodyJsonInt :: Int -> Handler Int
