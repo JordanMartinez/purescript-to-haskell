@@ -1,5 +1,26 @@
 # Modules
 
+## Location of Pragmas
+
+Not all Pragmas go here (e.g. INLINE, etc.), but this is where language extensions and GHC options go if they are enabled for the given file or override default values for the given file.
+
+```Haskell
+{-# LANGUAGE LambdaCase #-}
+{-# OPTIONS_GHC -Wno-name-shadowing #-}
+module ModuleName
+  ( exportedFunction
+  , exportedValue
+  ) where
+
+import ModuleName
+
+exportedFunction :: Show a => a -> String
+exportedFunction = show
+
+exportedValue :: Int
+exportedValue = 4
+```
+
 ## Importing
 
 Since PureScript does not allow Orphan Instances, type class instances are imported if they are used in the module. Haskell requires importing the module where the instance is defined. <span style="color: red;">*</span>
