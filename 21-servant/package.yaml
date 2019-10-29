@@ -75,6 +75,44 @@ dependencies:
 
 library:
   source-dirs: src
+  # Make developer experience similar to PureScript
+  default-extensions:
+  - KindSignatures
+  - LiberalTypeSynonyms
+  - EmptyDataDecls
+  - OverloadedLists
+  - OverloadedStrings
+  - NumericLiterals
+  - NegativeLiterals
+  - MultiParameterTypeClasses
+  - ConstrainedClassmethods
+  - FlexibleInstances
+  - FlexibleContexts
+  - FunctionalDependencies
+  - ConstraintKinds
+  - InstanceSigs
+  - DeriveFunctor
+  - DeriveFoldable
+  - DeriveTraversable
+  - GeneralizedNewtypeDeriving
+  - DerivingVia
+  - MonoLocalBinds
+  - PatternGuards
+  - ScopedTypeVariables
+  - RankNTypes
+  - LambdaCase
+  - BlockArguments
+  - TypeApplications
+  - RecordWildCards
+  - NamedFieldPuns
+  - ApplicativeDo
+  - BangPatterns
+  - PartialTypeSignatures
+  - ExplicitNamespaces
+  # Haskell-Only stuff
+  - TemplateHaskell
+  - PolyKinds
+
   ghc-options:
   - -Wall
   - -Wincomplete-uni-patterns
