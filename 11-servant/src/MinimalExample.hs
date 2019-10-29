@@ -40,11 +40,14 @@ server :: Server Routes
 server = homeR :<|> fooR
 
 
+-- Helps type inference
 routesProxy :: Proxy Routes
 routesProxy = Proxy
 
+-- Defines the web application
 webApp :: Application
 webApp = serve routesProxy server
 
+-- Runs the web application using Warp
 startApp :: IO ()
 startApp = run 8080 webApp
