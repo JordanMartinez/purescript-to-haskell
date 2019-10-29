@@ -20,14 +20,58 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base
+
+# TH
+- safe # expose safer wrappers around unsafe Prelude functions
+- template-haskell
+
+# Core: Non Text
+- unordered-containers
+- containers
+- vector
+- time
+
+# Core: Text
+- bytestring
+- text
+- case-insensitive
+
+# Core: HTTP Types
+- http-types
+
+# Domain: Seralization
 - aeson
-- servant-server
+
+# API/Infrastructure: Database
 - persistent
 - persistent-postgresql
 - persistent-template
-- template-haskell
+
+# API: Web Application Interface
 - wai
+- wai-extra
+- wai-logger
+
+# Infrastructure: Web Server
 - warp
+- http-client-tls
+
+# Servant
+- servant
+
+- servant-auth
+
+- servant-docs
+- servant-auth-docs
+
+- servant-swagger
+- servant-swagger-ui
+- servant-auth-swagger
+
+- servant-server
+- servant-auth-server
+
+- servant-multipart
 
 library:
   source-dirs: src
@@ -67,6 +111,8 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - my-servant
+    - quickcheck
+    - servant-quickcheck
     - hspec
     - hspec-wai
     - hspec-wai-json
