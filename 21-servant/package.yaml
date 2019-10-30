@@ -39,6 +39,9 @@ dependencies:
 # Core: HTTP Types
 - http-types
 
+# Core: Effects
+- transformers
+
 # Domain: Seralization
 - aeson
 

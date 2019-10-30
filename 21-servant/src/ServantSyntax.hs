@@ -9,6 +9,7 @@ module ServantSyntax
 
 import Data.Aeson
 import Data.Aeson.TH
+import Control.Monad.Trans.Reader
 import qualified Data.ByteString.Lazy as LBS
 import qualified Network.HTTP.Types.Header as HTTP
 import Data.Typeable (Typeable)
@@ -455,3 +456,20 @@ data User = User
   } deriving (Eq, Show)
 
 $(deriveJSON defaultOptions ''User)
+
+-- ## Using a Different Monad
+
+type SimpleRoute = "simpleRoute" :> Get '[PlainText] String
+
+simpleRouteHandler :: ServerT SimpleRoute (ReaderT String Handler)
+simpleRouteHandler = do
+  configString <- ask
+  pure ("constant value " <> configString)
+
+simpleRouteProxy :: Proxy SimpleRoute
+simpleRouteProxy = Proxy
+
+differentMonadServer :: Application
+differentMonadServer =
+  serve simpleRouteProxy
+    (hoistServer simpleRouteProxy (\x -> runReaderT x "config") simpleRouteHandler)
