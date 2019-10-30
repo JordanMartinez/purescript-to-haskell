@@ -76,45 +76,61 @@ dependencies:
 - yesod-form
 - classy-prelude-yesod
 
+ghc-options:
+- -Wall
+- -Wincomplete-uni-patterns
+- -Wincomplete-record-updates
+- -Wmissing-export-lists
+- -Widentities
+- -Wredundant-constraints
+- -Wpartial-fields
+- -Wcompat
+- -fprint-expanded-synonyms
+- -fprint-explicit-foralls
+- -ferror-spans
+- -fwarn-tabs
+
+# Make developer experience similar to PureScript
+default-extensions:
+- KindSignatures
+- LiberalTypeSynonyms
+- EmptyDataDecls
+- OverloadedLists
+- OverloadedStrings
+- NumericUnderscores
+- NegativeLiterals
+- MultiParamTypeClasses
+- ConstrainedClassMethods
+- FlexibleInstances
+- FlexibleContexts
+- FunctionalDependencies
+- ConstraintKinds
+- InstanceSigs
+- DeriveFunctor
+- DeriveFoldable
+- DeriveTraversable
+- GeneralizedNewtypeDeriving
+- DerivingVia
+- MonoLocalBinds
+- PatternGuards
+- ScopedTypeVariables
+- RankNTypes
+- LambdaCase
+- BlockArguments
+- TypeApplications
+- RecordWildCards
+- NamedFieldPuns
+- ApplicativeDo
+- BangPatterns
+- PartialTypeSignatures
+- ExplicitNamespaces
+
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
 library:
   source-dirs: src
-  # Make developer experience similar to PureScript
-  default-extensions:
-  - KindSignatures
-  - LiberalTypeSynonyms
-  - EmptyDataDecls
-  - OverloadedLists
-  - OverloadedStrings
-  - NumericUnderscores
-  - NegativeLiterals
-  - MultiParamTypeClasses
-  - ConstrainedClassMethods
-  - FlexibleInstances
-  - FlexibleContexts
-  - FunctionalDependencies
-  - ConstraintKinds
-  - InstanceSigs
-  - DeriveFunctor
-  - DeriveFoldable
-  - DeriveTraversable
-  - GeneralizedNewtypeDeriving
-  - DerivingVia
-  - MonoLocalBinds
-  - PatternGuards
-  - ScopedTypeVariables
-  - RankNTypes
-  - LambdaCase
-  - BlockArguments
-  - TypeApplications
-  - RecordWildCards
-  - NamedFieldPuns
-  - ApplicativeDo
-  - BangPatterns
-  - PartialTypeSignatures
-  - ExplicitNamespaces
   # Haskell-Only stuff
+  default-extensions:
   - TemplateHaskell
   - PolyKinds
 
@@ -122,34 +138,10 @@ library:
   - condition: (flag(dev)) || (flag(library-only))
     then:
       ghc-options:
-      - -Wall
-      - -Wincomplete-uni-patterns
-      - -Wincomplete-record-updates
-      - -Wmissing-export-lists
-      - -Widentities
-      - -Wredundant-constraints
-      - -Wpartial-fields
-      - -Wcompat
-      - -fprint-expanded-synonyms
-      - -fprint-explicit-foralls
-      - -ferror-spans
-      - -fwarn-tabs
       - -O0
       cpp-options: -DDEVELOPMENT
     else:
       ghc-options:
-      - -Wall
-      - -Wincomplete-uni-patterns
-      - -Wincomplete-record-updates
-      - -Wmissing-export-lists
-      - -Widentities
-      - -Wredundant-constraints
-      - -Wpartial-fields
-      - -Wcompat
-      - -fprint-expanded-synonyms
-      - -fprint-explicit-foralls
-      - -ferror-spans
-      - -fwarn-tabs
       - -Werror
       - -O2
 
@@ -173,56 +165,10 @@ tests:
   my-yesod-test:
     main: Spec.hs
     source-dirs: test
-    # Make developer experience similar to PureScript
-    default-extensions:
-    - KindSignatures
-    - LiberalTypeSynonyms
-    - EmptyDataDecls
-    - OverloadedLists
-    - OverloadedStrings
-    - NumericUnderscores
-    - NegativeLiterals
-    - MultiParamTypeClasses
-    - ConstrainedClassMethods
-    - FlexibleInstances
-    - FlexibleContexts
-    - FunctionalDependencies
-    - ConstraintKinds
-    - InstanceSigs
-    - DeriveFunctor
-    - DeriveFoldable
-    - DeriveTraversable
-    - GeneralizedNewtypeDeriving
-    - DerivingVia
-    - MonoLocalBinds
-    - PatternGuards
-    - ScopedTypeVariables
-    - RankNTypes
-    - LambdaCase
-    - BlockArguments
-    - TypeApplications
-    - RecordWildCards
-    - NamedFieldPuns
-    - ApplicativeDo
-    - BangPatterns
-    - PartialTypeSignatures
-    - ExplicitNamespaces
     # Haskell-Only stuff
+    default-extensions:
     - TemplateHaskell
     - PolyKinds
-    ghc-options:
-    - -Wall
-    - -Wincomplete-uni-patterns
-    - -Wincomplete-record-updates
-    - -Wmissing-export-lists
-    - -Widentities
-    - -Wredundant-constraints
-    - -Wpartial-fields
-    - -Wcompat
-    - -fprint-expanded-synonyms
-    - -fprint-explicit-foralls
-    - -ferror-spans
-    - -fwarn-tabs
     dependencies:
     - my-yesod
     - hspec
