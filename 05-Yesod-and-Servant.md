@@ -1,5 +1,24 @@
 # Yesod and Servant
 
+## Overview of Both
+
+Servant
+- uses template-haskell to reduce boilerplate for some things
+- uses type-level programming to guarantee that routes are correct
+- uses type-level programming to associate a type-level route with its corresponding handler
+- uses type classes extensively to do practically everything, including serialization.
+
+| Pros | Cons |
+| - | - |
+| - easy to understand and use | - restricts you to using type class codecs (e.g. `aeson`) rather than value-level codecs (e.g. `purescript-codec`) |
+| - provides good documentation on routes out-of-box | |
+| - handles the boring boilerplate for you | |
+
+Philosophically, I disagree with Servant's design tradeoffs due to the type class based codecs due to reading [Some Thoughts on Typeclass-based Codecs](http://code.slipthrough.net/2018/03/13/thoughts-on-typeclass-codecs/)
+
+Yesod (wip)
+- uses template-haskell to reduce boilerplate for some things
+
 ## Real World Demos of Yesod and Servant
 
 - [Real World - Yesod (server) + Persistent-created SQL](https://github.com/tzemanovic/haskell-yesod-realworld-example-app)
