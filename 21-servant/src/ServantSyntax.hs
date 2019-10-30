@@ -463,7 +463,8 @@ $(deriveJSON defaultOptions ''User)
 
 type SimpleRoute = "simpleRoute" :> Get '[PlainText] String
 
--- Concrete type   :: ServerT SimpleRoute (ReaderT String Handler)
+-- Concrete type   :: ServerT SimpleRoute (ReaderT String Handler output)
+-- a.k.a.          :: ServerT SimpleRoute (String -> IO (Either ServerError output))
 simpleRouteHandler :: forall m. MonadReader String m => ServerT SimpleRoute m
 simpleRouteHandler = do
   configString <- ask
@@ -475,7 +476,13 @@ simpleRouteProxy = Proxy
 differentMonadServer :: Application
 differentMonadServer =
   serve simpleRouteProxy
-    (hoistServer simpleRouteProxy (\x -> runReaderT x "config") simpleRouteHandler)
+    (hoistServer simpleRouteProxy (flip runReaderT "config") simpleRouteHandler)
+
+  -- i.e.
+  -- (hoistServer simpleRouteProxy
+  --    (\routeHandlerLogic -> runReaderT routeHandlerLogic "config")
+  --    simpleRouteHandler
+  -- )
 
 webAppUsingDifferentMonad :: IO ()
 webAppUsingDifferentMonad = run 8080 differentMonadServer
