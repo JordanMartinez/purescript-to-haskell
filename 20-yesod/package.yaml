@@ -80,6 +80,43 @@ dependencies:
 # defined below is just a thin wrapper.
 library:
   source-dirs: src
+  # Make developer experience similar to PureScript
+  default-extensions:
+  - KindSignatures
+  - LiberalTypeSynonyms
+  - EmptyDataDecls
+  - OverloadedLists
+  - OverloadedStrings
+  - NumericUnderscores
+  - NegativeLiterals
+  - MultiParamTypeClasses
+  - ConstrainedClassMethods
+  - FlexibleInstances
+  - FlexibleContexts
+  - FunctionalDependencies
+  - ConstraintKinds
+  - InstanceSigs
+  - DeriveFunctor
+  - DeriveFoldable
+  - DeriveTraversable
+  - GeneralizedNewtypeDeriving
+  - DerivingVia
+  - MonoLocalBinds
+  - PatternGuards
+  - ScopedTypeVariables
+  - RankNTypes
+  - LambdaCase
+  - BlockArguments
+  - TypeApplications
+  - RecordWildCards
+  - NamedFieldPuns
+  - ApplicativeDo
+  - BangPatterns
+  - PartialTypeSignatures
+  - ExplicitNamespaces
+  # Haskell-Only stuff
+  - TemplateHaskell
+  - PolyKinds
   when:
   - condition: (flag(dev)) || (flag(library-only))
     then:
@@ -135,7 +172,56 @@ tests:
   my-yesod-test:
     main: Spec.hs
     source-dirs: test
-    ghc-options: -Wall
+      # Make developer experience similar to PureScript
+      default-extensions:
+      - KindSignatures
+      - LiberalTypeSynonyms
+      - EmptyDataDecls
+      - OverloadedLists
+      - OverloadedStrings
+      - NumericUnderscores
+      - NegativeLiterals
+      - MultiParamTypeClasses
+      - ConstrainedClassMethods
+      - FlexibleInstances
+      - FlexibleContexts
+      - FunctionalDependencies
+      - ConstraintKinds
+      - InstanceSigs
+      - DeriveFunctor
+      - DeriveFoldable
+      - DeriveTraversable
+      - GeneralizedNewtypeDeriving
+      - DerivingVia
+      - MonoLocalBinds
+      - PatternGuards
+      - ScopedTypeVariables
+      - RankNTypes
+      - LambdaCase
+      - BlockArguments
+      - TypeApplications
+      - RecordWildCards
+      - NamedFieldPuns
+      - ApplicativeDo
+      - BangPatterns
+      - PartialTypeSignatures
+      - ExplicitNamespaces
+      # Haskell-Only stuff
+      - TemplateHaskell
+      - PolyKinds
+    ghc-options:
+    - -Wall
+    - -Wincomplete-uni-patterns
+    - -Wincomplete-record-updates
+    - -Wmissing-export-lists
+    - -Widentities
+    - -Wredundant-constraints
+    - -Wpartial-fields
+    - -Wcompat
+    - -fprint-expanded-synonyms
+    - -fprint-explicit-foralls
+    - -ferror-spans
+    - -fwarn-tabs
     dependencies:
     - my-yesod
     - hspec
