@@ -41,6 +41,7 @@ dependencies:
 
 # Core: Effects
 - transformers
+- mtl
 
 # Domain: Seralization
 - aeson
