@@ -390,14 +390,15 @@ type FooBarFullApproach =
 
 fooBarFullApproach :: Server FooBarFullApproach
 fooBarFullApproach =
-       getStringWithKeyParam
+    (  getStringWithKeyParam
   :<|> postStringHeaderInt
   :<|> putJsonIntReqbodyJsonInt
   :<|> deleteIntCaptureInt
+    )
   :<|> serveStaticFiles
   where
     getStringWithKeyParam :: Maybe String -> Handler String
-    getStringWithKeyParam value = pure (show value <> " and other stuff")
+    getStringWithKeyParam value = pure (" and other stuff")
 
     postStringHeaderInt :: Maybe Int -> Handler String
     postStringHeaderInt intHeader = pure (show intHeader <> " and some other stuff")
@@ -409,7 +410,7 @@ fooBarFullApproach =
     deleteIntCaptureInt capturedIntValue = pure capturedIntValue
 
     serveStaticFiles :: Server Raw -- Server, not Handler, for Raw
-    serveStaticFiles = serveStaticFilesViaDirectory "/var/www/"
+    serveStaticFiles = serveDirectoryFileServer "/var/www/"
 
 -- ## Full Syntax
 
