@@ -117,6 +117,7 @@ library:
   # Haskell-Only stuff
   - TemplateHaskell
   - PolyKinds
+
   when:
   - condition: (flag(dev)) || (flag(library-only))
     then:
@@ -172,43 +173,43 @@ tests:
   my-yesod-test:
     main: Spec.hs
     source-dirs: test
-      # Make developer experience similar to PureScript
-      default-extensions:
-      - KindSignatures
-      - LiberalTypeSynonyms
-      - EmptyDataDecls
-      - OverloadedLists
-      - OverloadedStrings
-      - NumericUnderscores
-      - NegativeLiterals
-      - MultiParamTypeClasses
-      - ConstrainedClassMethods
-      - FlexibleInstances
-      - FlexibleContexts
-      - FunctionalDependencies
-      - ConstraintKinds
-      - InstanceSigs
-      - DeriveFunctor
-      - DeriveFoldable
-      - DeriveTraversable
-      - GeneralizedNewtypeDeriving
-      - DerivingVia
-      - MonoLocalBinds
-      - PatternGuards
-      - ScopedTypeVariables
-      - RankNTypes
-      - LambdaCase
-      - BlockArguments
-      - TypeApplications
-      - RecordWildCards
-      - NamedFieldPuns
-      - ApplicativeDo
-      - BangPatterns
-      - PartialTypeSignatures
-      - ExplicitNamespaces
-      # Haskell-Only stuff
-      - TemplateHaskell
-      - PolyKinds
+    # Make developer experience similar to PureScript
+    default-extensions:
+    - KindSignatures
+    - LiberalTypeSynonyms
+    - EmptyDataDecls
+    - OverloadedLists
+    - OverloadedStrings
+    - NumericUnderscores
+    - NegativeLiterals
+    - MultiParamTypeClasses
+    - ConstrainedClassMethods
+    - FlexibleInstances
+    - FlexibleContexts
+    - FunctionalDependencies
+    - ConstraintKinds
+    - InstanceSigs
+    - DeriveFunctor
+    - DeriveFoldable
+    - DeriveTraversable
+    - GeneralizedNewtypeDeriving
+    - DerivingVia
+    - MonoLocalBinds
+    - PatternGuards
+    - ScopedTypeVariables
+    - RankNTypes
+    - LambdaCase
+    - BlockArguments
+    - TypeApplications
+    - RecordWildCards
+    - NamedFieldPuns
+    - ApplicativeDo
+    - BangPatterns
+    - PartialTypeSignatures
+    - ExplicitNamespaces
+    # Haskell-Only stuff
+    - TemplateHaskell
+    - PolyKinds
     ghc-options:
     - -Wall
     - -Wincomplete-uni-patterns
