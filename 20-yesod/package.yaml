@@ -80,7 +80,6 @@ ghc-options:
 - -Wall
 - -Wincomplete-uni-patterns
 - -Wincomplete-record-updates
-- -Wmissing-export-lists
 - -Widentities
 - -Wredundant-constraints
 - -Wpartial-fields
