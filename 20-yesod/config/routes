@@ -19,14 +19,14 @@
 
 -- dynamic path
 /foo/#Int PathPieceR GET
-/bar/#Int/#Int/#Int MultiPathPieceR Get
+/bar/#Int/#Int/#Int MultiPathPieceR GET
 
 -- disabling overlap checking
 /first/0 FirstR GET
 !/first/#Int AfterFirstR GET
 
 -- adding route attributes
-/attribute AttributeR Get !attribute
+/attribute AttributeR GET !attribute
 
 /hierarchialRoute HierarchialR:
   /route1 Route1R GET
@@ -34,7 +34,7 @@
   /subhierarchy SubHierarchyR:
     /final FinalR GET
 
-/hierarchyWithAttribute HierarchyAndAttributeR: !outerHierarchyAttribute
+/hierarchyWithAttribute HierarchyAndAttributeR !outerHierarchyAttribute:
   /innerRoute InnerRouteR GET
   /subRoute SubRouteR GET !innerHierarchyAttribute
     /endRoute EndRouteR GET
