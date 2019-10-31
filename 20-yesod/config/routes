@@ -13,7 +13,11 @@
 -- For the rest, see 'Routes.hs' file
 
 -- Full Syntax
+-- - Not Hierarchial (does not end with ':')
 -- Route DataTypeR HTTP_Method HTTP_Method !routeAttribute
+--
+-- - Hierarchial (ends with ':')
+-- Route DataTypeR HTTP_Method HTTP_Method !routeAttribute:
 
 -- Basic concept
 / HomeR GET POST
