@@ -76,8 +76,8 @@ createuser my-yesod --superuser --pwprompt
 # password Yesod will use to something else
 
 # Create the live and test databases
-createdb my-yesod
-createdb my-yesod_test
+createdb my-yesod --owner my-yesod
+createdb my-yesod_test --owner my-yesod
 ```
 
 ## Development
