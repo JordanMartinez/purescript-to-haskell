@@ -25,6 +25,8 @@
 -- static path
 /path PathR GET
 
+/allHttpMethods AllHttpMethodsR
+
 -- dynamic path
 /foo/#Int PathPieceR GET
 /bar/#Int/#Int/#Int MultiPathPieceR GET

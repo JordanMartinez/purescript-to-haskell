@@ -9,6 +9,9 @@ getHomeR = pure "foo"
 postHomeR :: Handler String
 postHomeR = pure "foo"
 
+handleAllHttpMethodsR :: Handler String
+handleAllHttpMethodsR = pure "foo"
+
 getPathR :: Handler String
 getPathR = pure "foo"
 
