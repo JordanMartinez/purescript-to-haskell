@@ -20,7 +20,7 @@
 #
 # Jordan - Updated resolver to LTS-14.11 so that other we use
 # more recent versions of libraries
-resolver: lts-14.11
+resolver: lts-14.12
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
