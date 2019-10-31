@@ -3,10 +3,10 @@
 This folder's contents were generated via `stack new my-yesod yesod-postgres`. Then they were edited by hand. This folder is still a WIP.
 
 Changes made:
-- Changed Stack's LTS resolver to 14.11
+- Changed Stack's LTS resolver to 14.12
 - Removed version boundaries on all depenedencies in `package.yml`
-- Use meta-language to document Route syntax
-- Use meta-language to document Persistent syntax
+- Use meta-language to document Route syntax (See `config/routes` and `Handler/Routes.hs` files)
+- Use meta-language to document Persistent syntax (See `config/models` and `Model.hs` and `Model/*.hs` files)
 - Deleted files related to Shakespearean files (Hamlet, Julius, Cassius/Lucius):
 		- Deleted `/template/*` files
 		- Deleted `/static/*` files
