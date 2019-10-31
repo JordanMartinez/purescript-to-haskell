@@ -1,6 +1,6 @@
 -- By default this file is used by `persistFileWith` in Model.hs (which is imported by Foundation.hs)
 -- Syntax for this file here: https://github.com/yesodweb/persistent/blob/master/docs/Persistent-entity-syntax.md
-{-
+
 Table sql=real_table_name
   columnName DataType default='Foo' sqltype=varchar(3) sql=real_column_name
   columnNameThatCanBeNull DataType Maybe
@@ -12,13 +12,14 @@ Table sql=real_table_name
   UniqueColumns2 column3
   deriving Eq Show Ord
 
-ParentTable
-  id Int
-
-ChildTable
-  parentRow ParentTableId constraint=clearer_constraint_name
-
--}
+-- This doesn't compile for some reason. Not sure why.
+-- ParentTable
+--   id Int
+--   foo Text
+--
+-- ChildTable
+--   parentRow Int
+--   someOther ParentTable
 
 User
     ident Text
