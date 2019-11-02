@@ -46,5 +46,22 @@
 
 /hierarchyWithAttribute HierarchyAndAttributeR !outerHierarchyAttribute:
   /innerRoute InnerRouteR GET
-  /subRoute SubRouteR GET !innerHierarchyAttribute:
+  /subRoute SubRouteR !innerHierarchyAttribute:
     /endRoute EndRouteR GET
+
+-- Invalid syntax: a route cannot respond to a request (as indicated
+-- by 'GET') and be a hierarchical route at the same time (as indicated
+-- by the ':').
+--
+-- Uncomment these two lines to see for yourself
+-- See `src/Handler/Routes.hs` file for corresponding section.
+--/hierarchy HierarchyAndHttpMethod GET:
+--  /innerValRoute InnerValRouteR GET
+
+
+-- Authorized Needed Routes
+/authorizedByPath AuthorizedByPathR GET
+
+/authorizedByTopLevelAttribute AuthByTLAttribR !requiresAuthorization:
+  /first  AuthedFirstR GET
+  /second AuthedSecondR GET

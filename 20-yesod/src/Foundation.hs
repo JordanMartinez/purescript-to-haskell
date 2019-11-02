@@ -58,9 +58,16 @@ data MenuTypes
 -- http://www.yesodweb.com/book/scaffolding-and-the-site-template#scaffolding-and-the-site-template_foundation_and_application_modules
 --
 -- This function also generates the following type synonyms:
--- type Handler = HandlerT App IO
--- type Widget = WidgetT App IO ()
+--    (deprecated! see comment below) type Handler = HandlerT App IO
+--    (deprecated! see commnt below)  type Widget = WidgetT App IO ()
 mkYesodData "App" $(parseRoutesFile "config/routes")
+
+-- Handler/HandlerT is deprecated:
+-- https://hackage.haskell.org/package/yesod-core-1.6.16.1/docs/Yesod-Core-Handler.html#t:HandlerT
+-- Widget/WidgetT is deprecated∷
+-- https://hackage.haskell.org/package/yesod-core-1.6.16.1/docs/Yesod-Core-Widget.html#t:WidgetT
+type HandlerX = HandlerFor App
+type WidgetX = WidgetFor App
 
 -- | A convenient synonym for creating forms.
 type Form x = Html -> MForm (HandlerFor App) (FormResult x, Widget)
@@ -120,15 +127,20 @@ instance Yesod App where
         :: Route App  -- ^ The route the user is visiting.
         -> Bool       -- ^ Whether or not this is a "write" request.
         -> Handler AuthResult
-    -- Routes not requiring authentication.
-    isAuthorized HomeR _ = return Authorized
-    isAuthorized FaviconR _ = return Authorized
-    isAuthorized RobotsR _ = return Authorized
-    isAuthorized (StaticR _) _ = return Authorized
+    -- Routes requiring authorization
+    isAuthorized AuthorizedByPathR _ = pure (Unauthorized "Requires authorization")
+    isAuthorized route@(AuthByTLAttribR _) _ =
+      if "requiresAuthorization" `member` routeAttrs route
+      then do
+        muser <- maybeAuthId
+        case muser of
+          Nothing -> pure AuthenticationRequired
+          Just id -> pure Authorized
+      else do
+        pure (Unauthorized "Needs authentication")
 
-    -- the profile route requires that the user is authenticated, so we
-    -- delegate to that function
-    -- isAuthorized ProfileR _ = isAuthenticated
+    -- All other routes don't require authorization.
+    isAuthorized _ _ = pure Authorized
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
