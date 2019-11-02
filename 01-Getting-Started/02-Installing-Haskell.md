@@ -87,6 +87,7 @@ Note: if you are new to NeoVim, refer to the below instructions. Learn NeoVim by
     - type `CTRL+W` two times to switch to a different window
     - type `:q` to quit NeoVim
 4. After completing it, see the [Vim Cheatsheet](https://www.fcodelabs.com/2018/12/08/Vim-Cheats/)
+5. Then see the first few chapters for [Learn Vimscript the Hard Way](http://learnvimscriptthehardway.stevelosh.com/) to understand how to remap inputted keys to quick commands.
 
 ### Haskell IDE Engine
 
