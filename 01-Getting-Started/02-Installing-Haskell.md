@@ -51,6 +51,10 @@ stack build --copy-compiler-tool hlint hoogle weeder
 stack hoogle --server
 # You can now open up a Hoogle instance for your project and its dependencies
 # by opening a browser to `http://127.0.0.1:<port number it prints out>`
+
+# Generate documentation for your project, so that it's accessible
+# for other tools (e.g. nvim below)
+stack exec -- hoogle generate
 ```
 
 ## Editor Support
