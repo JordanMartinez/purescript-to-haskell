@@ -18,7 +18,7 @@
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
 #
-# Jordan - Updated resolver to LTS-14.11 so that other we use
+# Jordan - Updated resolver to LTS-14.11 so that we use
 # more recent versions of libraries
 resolver: lts-14.12
 
