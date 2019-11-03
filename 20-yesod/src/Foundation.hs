@@ -73,6 +73,8 @@ type DB a = forall (m :: * -> *).
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
+    -- === Application-related things ===
+
     -- Controls the base of generated URLs. For more information on modifying,
     -- see: https://github.com/yesodweb/yesod/wiki/Overriding-approot
     approot :: Approot App
@@ -98,18 +100,15 @@ instance Yesod App where
     yesodMiddleware :: ToTypedContent res => Handler res -> Handler res
     yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
 
-    defaultLayout :: Widget -> Handler Html
-    defaultLayout widget = do
-        master <- getYesod
-        mmsg <- getMessage
+    -- === Path-related things ===
 
-        muser <- maybeAuthPair
-        mcurrentRoute <- getCurrentRoute
+    --cleanPath :: site -> [Text] -> Either [Text] [Text]
+    --cleanPath = default implementation should be fine
 
-        -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
-        -- (title, parents) <- breadcrumbs
+    --joinPath :: site -> T.Text -> [T.Text] -> [(T.Text, T.Text)] -> Builder
+    --joinPath = default implementation should be fine
 
-        pure "foo"
+    -- === Route-related things ===
 
     -- The page to be redirected to when authentication is required.
     authRoute
@@ -135,6 +134,49 @@ instance Yesod App where
     -- All other routes don't require authorization.
     isAuthorized _ _ = pure Authorized
 
+    -- === Miscellaneous Application things ===
+
+    -- maximumContentLength :: App -> Maybe (Route site) -> Maybe Word64
+    -- maximumContentLength _ _ = Just $ 2 * 1024 * 1024 -- 2 megabytes
+
+    -- fileUpload :: App -> RequestBodyLength -> FileUpload
+    -- fileUpload _ _
+    --   -- default shown below
+    --   | when req body > 50kb || chunked req body = store in temp file
+    --   | otherwise = store in memory
+
+    -- === Logger-related things ===
+
+    -- What messages should be logged. The following includes all messages when
+    -- in development, and warnings and errors in production.
+    shouldLogIO :: App -> LogSource -> LogLevel -> IO Bool
+    shouldLogIO app _source level =
+        return $
+        appShouldLogAll (appSettings app)
+            || level == LevelWarn
+            || level == LevelError
+
+    makeLogger :: App -> IO Logger
+    makeLogger = return . appLogger
+
+    -- === Server-Side Rendering-related things ===
+
+    defaultLayout :: Widget -> Handler Html
+    defaultLayout widget = do
+        master <- getYesod
+        mmsg <- getMessage
+
+        muser <- maybeAuthPair
+        mcurrentRoute <- getCurrentRoute
+
+        -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
+        -- (title, parents) <- breadcrumbs
+
+        pure "foo"
+
+    --errorHandler :: ErrorResponse -> HandlerFor App TypedContent
+    --errorHandler = defaultErrorHandler
+
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
     -- expiration dates to be set far in the future without worry of
@@ -159,18 +201,6 @@ instance Yesod App where
         -- Generate a unique filename based on the content itself
         genFileName lbs = "autogen-" ++ base64md5 lbs
 
-    -- What messages should be logged. The following includes all messages when
-    -- in development, and warnings and errors in production.
-    shouldLogIO :: App -> LogSource -> LogLevel -> IO Bool
-    shouldLogIO app _source level =
-        return $
-        appShouldLogAll (appSettings app)
-            || level == LevelWarn
-            || level == LevelError
-
-    makeLogger :: App -> IO Logger
-    makeLogger = return . appLogger
-
 -- Define breadcrumbs.
 -- instance YesodBreadcrumbs App where
     -- Takes the route that the user is currently on, and returns a tuple
@@ -187,13 +217,13 @@ instance Yesod App where
 -- How to run database actions.
 instance YesodPersist App where
     type YesodPersistBackend App = SqlBackend
-    runDB :: SqlPersistT Handler a -> Handler a
+    runDB :: SqlPersistT (HandlerFor App) a -> HandlerFor App a
     runDB action = do
         master <- getYesod
         runSqlPool action $ appConnPool master
 
 instance YesodPersistRunner App where
-    getDBRunner :: Handler (DBRunner App, Handler ())
+    getDBRunner :: HandlerFor App (DBRunner App, Handler ())
     getDBRunner = defaultGetDBRunner appConnPool
 
 instance YesodAuth App where
@@ -227,7 +257,7 @@ instance YesodAuth App where
         where extraAuthPlugins = [authDummy | appAuthDummyLogin $ appSettings app]
 
 -- | Access function to determine if a user is logged in.
-isAuthenticated :: Handler AuthResult
+isAuthenticated :: HandlerFor App AuthResult
 isAuthenticated = do
     muid <- maybeAuthId
     return $ case muid of
@@ -249,7 +279,7 @@ instance HasHttpManager App where
     getHttpManager :: App -> Manager
     getHttpManager = appHttpManager
 
-unsafeHandler :: App -> Handler a -> IO a
+unsafeHandler :: App -> HandlerFor App a -> IO a
 unsafeHandler = Unsafe.fakeHandlerGetLogger appLogger
 
 -- Note: Some functionality previously present in the scaffolding has been
