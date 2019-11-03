@@ -3,12 +3,19 @@ module Handler.Routes where
 
 import Import
 
+-- ## Preface
+--
 -- Normally, we'd use Handler here. However, it's deprecated.
 -- https://hackage.haskell.org/package/yesod-core-1.6.16.1/docs/Yesod-Core-Handler.html#t:HandlerT
 --
 -- so, we've defined our own type alias in `Foundation.hs` to replace it
 -- called `HandlerX` and we'll be using it here below.
 -- type HandlerX a = HandleFor App a
+
+-- ## Route Examples
+
+-- ### No Authorization needed
+
 getHomeR :: HandlerX String
 getHomeR = pure "home - get"
 
@@ -69,7 +76,7 @@ getEndRouteR = pure "end route"
 --getInnerValRouteR :: HandlerX String
 --getInnerValRouteR = pure "inner val route"
 
--- Routes requiring authorization
+-- ### Authorization needed
 
 getAuthorizedByPathR :: HandlerX String
 getAuthorizedByPathR = pure "authorized by path"
