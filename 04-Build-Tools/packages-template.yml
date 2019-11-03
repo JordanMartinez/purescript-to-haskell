@@ -1,3 +1,7 @@
+name:    project-name
+version: "0.0.0"
+
+# Make developer experience similar to PureScript
 ghc-options:
 - -Wall
 - -Wincomplete-uni-patterns
@@ -7,21 +11,42 @@ ghc-options:
 - -Wredundant-constraints
 - -Wpartial-fields
 - -Wcompat
-
-- -Werror
-
 - -fprint-expanded-synonyms
 - -fprint-explicit-foralls
 - -ferror-spans
+- -fwarn-tabs
 
-
-https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/using-optimisation.html#o-convenient-packages-of-optimisation-flags
-
-foo -flagForProgram +RTS -flagForRTS -RTS -flagForProgram
-
-foo -flagForProgram (-flagForRTS) -flagForProgram
-
-
-https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/sooner.html
-
-document PRAGMAs and that they have to go above 'module' keyword
+# Make developer experience similar to PureScript
+default-extensions:
+- KindSignatures
+- LiberalTypeSynonyms
+- EmptyDataDecls
+- OverloadedLists
+- OverloadedStrings
+- NumericUnderscores
+- NegativeLiterals
+- MultiParamTypeClasses
+- ConstrainedClassMethods
+- FlexibleInstances
+- FlexibleContexts
+- FunctionalDependencies
+- ConstraintKinds
+- InstanceSigs
+- DeriveFunctor
+- DeriveFoldable
+- DeriveTraversable
+- GeneralizedNewtypeDeriving
+- DerivingVia
+- MonoLocalBinds
+- PatternGuards
+- ScopedTypeVariables
+- RankNTypes
+- LambdaCase
+- BlockArguments
+- TypeApplications
+- RecordWildCards
+- NamedFieldPuns
+- ApplicativeDo
+- BangPatterns
+- PartialTypeSignatures
+- ExplicitNamespaces
