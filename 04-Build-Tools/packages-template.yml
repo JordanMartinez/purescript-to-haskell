@@ -23,7 +23,7 @@ maintainer:          "example@example.com"
 # ^ defaults to author if blank
 copyright:           "2019 Author name here"
 
-# Project- Metadat used when publishing package
+# Project- Metadata used when publishing package
 # synopsis:            Short description of your package
 # category:            Web
 
