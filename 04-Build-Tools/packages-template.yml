@@ -1,5 +1,42 @@
-name:    project-name
-version: "0.0.0"
+# For an explanation on each field below, see
+# https://www.haskell.org/cabal/users-guide/cabal-projectindex.html#cap-package.cabal%20fields
+#
+# hpack simply makes this less boilerplatey and simpler to write.
+
+# Project - Essentials
+name:                foo
+version:             0.1.0.0
+
+# Project - Metadata
+github:              "githubuser/foo"
+#git:
+# ^ no effect of github given
+#homepage:
+# ^ defaults to `<repo>#readme` if github is not blank
+#bug-reports:
+# ^ defaults to `<repo>/issues` if github is not blank
+license:             BSD3
+#license-file
+# ^ Defaults to `LICENSE` if file exists
+author:              "Author name here"
+maintainer:          "example@example.com"
+# ^ defaults to author if blank
+copyright:           "2019 Author name here"
+
+# Project- Metadat used when publishing package
+# synopsis:            Short description of your package
+# category:            Web
+
+# stability:
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/foo#readme>
+
+extra-source-files:
+- README.md
+- ChangeLog.md
 
 # Make developer experience similar to PureScript
 ghc-options:
@@ -50,3 +87,80 @@ default-extensions:
 - BangPatterns
 - PartialTypeSignatures
 - ExplicitNamespaces
+
+# The library contains all of our application code. The executable
+# defined below is just a thin wrapper.
+library:
+  source-dirs: src
+  # Enable additional extensions to the above
+  #default-extensions:
+  #- TemplateHaskell
+
+  # Enable additional GHC options to the above
+  #ghc-options:
+  #- -Werror
+
+  # Conditionally enable extensions or options
+  # (e.g. `stack build --flag project-name:enable`)
+  #when:
+  #- condition: (flag(enable))
+  #  default-extensions:
+  #  - TemplateHaskell
+  #  ghc-options:
+  #  - -O2
+
+  # Toggle between specific configurations
+  # (e.g. `stack build --flag project-name:toggle-on`)
+  #when:
+  #- condition: (flag(toggle-on))
+  #  then:
+  #    default-extensions:
+  #    - TemplateHaskell
+  #    ghc-options:
+  #    - -O2
+  #  else:
+  #    default-extensions:
+  #    - TemplateHaskell
+  #    ghc-options:
+  #    - -O2
+
+executables:
+
+  # stack exec -- project-name-exe
+  project-name-exe:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+
+    dependencies:
+    - project-name
+
+# Test suite
+tests:
+  project-name-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - project-name
+
+# Define flags so that `stack build --flag project-name:flag-name` works
+flags:
+  flag-name:
+    description: Explanation of what this flag does
+    manual: false
+    default: false
+  enable:
+    description: Turns on other options
+    manual: false
+    default: false
+  toggle-on:
+    description: Uses 'then' options, not 'else' options
+    manual: false
+    default: false
