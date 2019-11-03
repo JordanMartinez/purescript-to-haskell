@@ -2,14 +2,6 @@
 -- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
 -- and (advanced stuff) here: https://www.yesodweb.com/book/route-attributes
 
--- These are specially handled by Yesod
-/static StaticR Static appStatic
-/auth   AuthR   Auth   getAuth
-
--- See 'Common.hs' file
-/favicon.ico FaviconR GET
-/robots.txt RobotsR GET
-
 -- For the rest, see 'Routes.hs' file
 
 -- Full Syntax
@@ -68,3 +60,20 @@
 /authorizedByTopLevelAttribute AuthByTLAttribR !requiresAuthorization:
   /first  AuthedFirstR GET
   /second AuthedSecondR GET
+
+--------------------------------------
+
+-- See 'Common.hs' file
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+-- These are specially handled by Yesod
+/static StaticR Static appStatic
+/auth   AuthR   Auth   getAuth
+
+------------------------------------
+
+-- Subsites
+
+-- Full Syntax
+-- Route DataTypeR SubSiteType foundationToSubsiteFunction
