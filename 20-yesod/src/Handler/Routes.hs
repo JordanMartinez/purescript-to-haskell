@@ -27,6 +27,9 @@ getPathPieceR i = pure ("path piece " <> show i)
 getMultiPathPieceR :: Int -> Int -> Int -> HandlerX String
 getMultiPathPieceR a b c = pure ("path pieces: " <> show (a + b + c))
 
+getMultipleIntArgsR :: [Int] -> HandlerX String
+getMultipleIntArgsR list = pure (foldl' (\acc next -> acc <> show next) "" list)
+
 getFirstR :: HandlerX String
 getFirstR = pure "first"
 

@@ -31,6 +31,9 @@
 /foo/#Int PathPieceR GET
 /bar/#Int/#Int/#Int MultiPathPieceR GET
 
+-- dynamic path - multiple arguments
+/multiple/*Int MultipleIntArgsR GET
+
 -- disabling overlap checking
 /first/0 FirstR GET
 !/first/#Int AfterFirstR GET
