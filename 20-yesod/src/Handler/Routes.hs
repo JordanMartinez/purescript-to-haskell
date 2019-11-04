@@ -86,3 +86,79 @@ getAuthedFirstR = pure "first - authorized by top-level attribute"
 
 getAuthedSecondR :: HandlerX String
 getAuthedSecondR = pure "second - authorized by top-level attribute"
+
+-- ### Handler Functions
+
+getHandlerFunctionsR :: HandlerX String
+getHandlerFunctionsR = do
+  yesod <- getYesod
+  yesod2 <- ask
+  configValue <- asks \yesod3 -> {- getValue -} yesod3
+
+-- #### Query Parameters
+
+  maybeParameterValue <- lookupGetParam
+  maybeListParameterValues <- lookupGetParams
+
+-- #### Headers
+
+  -- any header
+  addHeader "some-header" "value"
+  replaceOrAddHeader "some-header-two" "value"
+
+  -- these won't work until next request
+  maybeHeaderValue <- lookupHeader (CI "some-header")
+  maybeListHeaderValues <- lookupHeaders (CI "some-header")
+
+  -- Sets the language for user's session
+  setLanguage "en-US"
+
+  -- List can include values in this order:
+  -- user session, then parameter, then cookie, then "Accept-Language" header
+  listOfLanguages <- languages
+
+-- ##### Specific Headers
+
+  -- Content-Disposition: attachment; filename="file-name.jpg"
+  addContentDispositionFileName "file-name.jpg"
+
+  -- Cache-Control: max-age=20, public
+  cacheSeconds 20
+
+  -- Expires: HTTP-date
+  neverExpires -- some date in 2037
+  alreadyExpired -- date in past, so don't cache it
+  expiresAt
+
+-- #### Cookies
+
+  setCsrfCookie
+
+  twoHourExpiration <- getExpires 120 -- minutes
+  let myCookie =
+        defaultSetCookie { setCookieName = "cookie-name"
+                         , setCookieValue = "cookie-value"
+                         , setCookiePath     = Just "/"
+                         , setCookieExpires  = Just twoHourExpiration
+                         , setCookieMaxAge   = Nothing
+                         , setCookieDomain   = Nothing
+                         , setCookieHttpOnly = True
+                         , setCookieSecure   = True
+                         , setCookieSameSite = Just sameSiteStrict
+                         }
+
+  setCookie myCookie
+
+  -- these won't work until next request
+  maybeCookieValue <- lookupCookie "cookie-name"
+  maybeListCookieValues <- lookupCookies "some-cookie"
+
+  deleteCookie "key" "path"
+  pure "get handler functions"
+
+postHandlerFunctionsR :: HandlerX String
+postHandlerFunctionsR = do
+  maybeParameterValue <- lookupPostParam
+  maybeListParameterValues <- lookupPostParams
+
+  pure "handler function - post"

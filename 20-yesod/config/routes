@@ -63,6 +63,10 @@
 
 --------------------------------------
 
+/handlerFunctions HandlerFunctionsR GET POST
+
+--------------------------------------
+
 -- See 'Common.hs' file
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
