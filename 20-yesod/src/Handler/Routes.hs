@@ -154,6 +154,25 @@ getHandlerFunctionsR = do
   maybeListCookieValues <- lookupCookies "some-cookie"
 
   deleteCookie "key" "path"
+
+-- #### Sessions
+
+  sessionMap <- getSession
+
+  maybeTextValue <- lookupSession "key"
+  maybeByteStringValue <- lookupSessionBS "key"
+
+  setSession "key" "text value"
+  setSessionBS "key" "bytestring value"
+
+  deleteSession "key"
+
+  clearSession
+
+  -- post-redirect-get pattern
+  setMessage "some message value"
+  someMessageValue <- getMessage
+
   pure "get handler functions"
 
 postHandlerFunctionsR :: HandlerX String
