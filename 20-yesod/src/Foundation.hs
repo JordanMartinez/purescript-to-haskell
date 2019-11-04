@@ -70,6 +70,18 @@ type Form x = Html -> MForm (HandlerFor App) (FormResult x, Widget)
 type DB a = forall (m :: * -> *).
     (MonadIO m) => ReaderT SqlBackend m a
 
+-- | Timeout in minutes. Used in `defaultClientSessionBackend`.
+clientSessionTimeout :: Int
+clientSessionTimeout = 120 -- minutes
+
+-- | Timeout in minutes. Used in `sslOnlyMiddleware`. Ensures that
+-- HTTP requests will not be made for as long as (if not longer than)
+-- the client session cookie's timeout. To increase the timeout, change `0` to
+-- a positive value.
+strictTransportSecurityTimeout :: Int
+strictTransportSecurityTimeout =
+  clientSessionTimeout + 0 -- minutes
+
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
@@ -85,9 +97,10 @@ instance Yesod App where
 
     -- Store session data on the client in encrypted cookies,
     -- default session idle timeout is 120 minutes
+    -- Also ensure that these sessions are only transmitted via HTTPS
     makeSessionBackend :: App -> IO (Maybe SessionBackend)
-    makeSessionBackend _ = Just <$> defaultClientSessionBackend
-        120    -- timeout in minutes
+    makeSessionBackend _ = sslOnlySessions $ fmap Just $ defaultClientSessionBackend
+        clientSessionTimeout
         "config/client_session_key.aes"
 
     -- Yesod Middleware allows you to run code before and after each handler function.
@@ -97,8 +110,11 @@ instance Yesod App where
     --   b) Validates that incoming write requests include that token in either a header or POST parameter.
     -- To add it, chain it together with the defaultMiddleware: yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
     -- For details, see the CSRF documentation in the Yesod.Core.Handler module of the yesod-core package.
+    -- Also add `sslOnlyMiddleware` with same client session timeout as
     yesodMiddleware :: ToTypedContent res => Handler res -> Handler res
-    yesodMiddleware = defaultYesodMiddleware . defaultCsrfMiddleware
+    yesodMiddleware =
+      (sslOnlyMiddleware strictTransportSecurityTimeout) .
+        defaultYesodMiddleware . defaultCsrfMiddleware
 
     -- === Path-related things ===
 
