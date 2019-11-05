@@ -17,8 +17,8 @@ import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
-import qualified Data.CaseInsensitive as CI
-import qualified Data.Text.Encoding as TE
+-- import qualified Data.CaseInsensitive as CI
+-- import qualified Data.Text.Encoding as TE
 
 -- | The foundation datatype for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -177,18 +177,18 @@ instance Yesod App where
 
     -- === Server-Side Rendering-related things ===
 
-    defaultLayout :: Widget -> Handler Html
-    defaultLayout widget = do
-        master <- getYesod
-        mmsg <- getMessage
+    -- defaultLayout :: Widget -> Handler Html
+    -- defaultLayout {- widget -} = do
+        -- master <- getYesod
+        -- mmsg <- getMessage
 
-        muser <- maybeAuthPair
-        mcurrentRoute <- getCurrentRoute
+        -- muser <- maybeAuthPair
+        -- mcurrentRoute <- getCurrentRoute
 
         -- Get the breadcrumbs, as defined in the YesodBreadcrumbs instance.
         -- (title, parents) <- breadcrumbs
 
-        pure "foo"
+        -- pure $ toHtml "foo"
 
     --errorHandler :: ErrorResponse -> HandlerFor App TypedContent
     --errorHandler = defaultErrorHandler

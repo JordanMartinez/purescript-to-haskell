@@ -33,6 +33,9 @@ dependencies:
 - yaml
 - aeson
 
+# Domain: Cookies
+- cookie
+
 # API: Web Application Interface
 - wai
 - wai-extra
@@ -141,8 +144,8 @@ library:
       cpp-options: -DDEVELOPMENT
     else:
       ghc-options:
-      - -Werror
       - -O2
+      #- -Werror
 
 # Runnable executable for our application
 executables:

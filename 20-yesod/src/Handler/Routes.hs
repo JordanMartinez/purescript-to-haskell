@@ -2,6 +2,9 @@
 module Handler.Routes where
 
 import Import
+import qualified Data.CaseInsensitive as CI
+import Data.CaseInsensitive (CI(..))
+import Web.Cookie (setCookieName, setCookiePath, setCookieExpires, setCookieValue, setCookieMaxAge, setCookieDomain, setCookieSecure, setCookieHttpOnly, setCookieSameSite, defaultSetCookie, sameSiteStrict)
 
 -- ## Preface
 --
@@ -31,11 +34,11 @@ getPathR = pure "path"
 getPathPieceR :: Int -> HandlerX String
 getPathPieceR i = pure ("path piece " <> show i)
 
-getMultiPathPieceR :: Int -> Int -> Int -> HandlerX String
-getMultiPathPieceR a b c = pure ("path pieces: " <> show (a + b + c))
+-- getMultiPathPieceR :: ThreeInts -> HandlerX String
+-- getMultiPathPieceR (ThreeInts (a, b, c)) = pure ("path pieces: " <> show (a + b + c))
 
-getMultipleIntArgsR :: [Int] -> HandlerX String
-getMultipleIntArgsR list = pure (foldl' (\acc next -> acc <> show next) "" list)
+-- getMultipleIntArgsR :: [Int] -> HandlerX String
+-- getMultipleIntArgsR list = pure (foldl' (\acc next -> acc <> show next) "" list)
 
 getFirstR :: HandlerX String
 getFirstR = pure "first"
@@ -97,8 +100,8 @@ getHandlerFunctionsR = do
 
 -- #### Query Parameters
 
-  maybeParameterValue <- lookupGetParam
-  maybeListParameterValues <- lookupGetParams
+  maybeParameterValue <- lookupGetParam "queryParam"
+  maybeListParameterValues <- lookupGetParams "queryParam"
 
 -- #### Headers
 
@@ -107,8 +110,9 @@ getHandlerFunctionsR = do
   replaceOrAddHeader "some-header-two" "value"
 
   -- these won't work until next request
-  maybeHeaderValue <- lookupHeader (CI "some-header")
-  maybeListHeaderValues <- lookupHeaders (CI "some-header")
+  let someHeader = "some-header" :: CI ByteString
+  maybeHeaderValue <- lookupHeader someHeader
+  maybeListHeaderValues <- lookupHeaders someHeader
 
   -- Sets the language for user's session
   setLanguage "en-US"
@@ -126,9 +130,10 @@ getHandlerFunctionsR = do
   cacheSeconds 20
 
   -- Expires: HTTP-date
+  nowUtcTime <- liftIO getCurrentTime
   neverExpires -- some date in 2037
   alreadyExpired -- date in past, so don't cache it
-  expiresAt
+  expiresAt nowUtcTime
 
 -- #### Cookies
 
@@ -177,7 +182,7 @@ getHandlerFunctionsR = do
 
 postHandlerFunctionsR :: HandlerX String
 postHandlerFunctionsR = do
-  maybeParameterValue <- lookupPostParam
-  maybeListParameterValues <- lookupPostParams
+  maybeParameterValue <- lookupPostParam "param"
+  maybeListParameterValues <- lookupPostParams "param"
 
   pure "handler function - post"
